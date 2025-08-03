@@ -170,25 +170,14 @@
         "float, class:(pavucontrol)"
         "float, class:(nm-connection-editor)"
         
-        # LEFT MONITOR (DP-3) - Specific Ghostty windows by title
-        "workspace 1, class:(ghostty), title:(Claude Terminal)"
-        "workspace 1, class:(ghostty), title:(Mprocs Terminal)"
-        "workspace 2, class:(firefox)"                              
-        "workspace 3, class:(ghostty), title:(System Monitor)"     
+        # Window sizing for terminals (no workspace assignment - handled by exec)
+        "size 480 1080, class:(ghostty), title:^(Claude Terminal)$"    # Left half of left monitor
+        "size 480 1080, class:(ghostty), title:^(Mprocs Terminal)$"    # Right half of left monitor
+        "fullscreen, class:(ghostty), title:^(System Monitor)$"        # Fullscreen btop
         
-        # RIGHT MONITOR (DP-1) - Emacs only (no Ghostty should go here)
-        "workspace 6, class:(Emacs)"
-        "workspace 6, class:(emacs)"    # Case variation
-        
-        # Documentation terminal goes to left monitor workspace 2
-        "workspace 2, class:(ghostty), title:(Documentation)"
-        
-        # Window sizing (within their assigned workspaces/monitors)
-        "size 480 1080, class:(ghostty), title:(Claude Terminal)"    # Left half of left monitor
-        "size 480 1080, class:(ghostty), title:(Mprocs Terminal)"    # Right half of left monitor
-        "fullscreen, class:(Emacs)"                                  # Fullscreen on right monitor
-        "fullscreen, class:(emacs)"                                  # Case variation
-        "fullscreen, class:(ghostty), title:(System Monitor)"       # Fullscreen btop
+        # Emacs sizing
+        "fullscreen, class:(Emacs)"                                     # Fullscreen on right monitor
+        "fullscreen, class:(emacs)"                                     # Case variation
       ];
       
       # Startup applications
@@ -211,39 +200,31 @@
         # Polkit agent
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         
-        # Default layout setup
+        # Default layout setup using exec workspace assignment (reliable approach)
         "sleep 3 && ${pkgs.writeShellScript "setup-default-layout" ''
-          # Left monitor workspace 1: Split terminals for development
-          hyprctl dispatch workspace 1
+          # Launch applications directly on their assigned workspaces
           
-          # Claude terminal (left half)
-          ghostty --title="Claude Terminal" -e bash -c "cd ~/src/catch.ideas && claude --dangerously-skip-permissions" &
+          # Left monitor workspace 1: Development terminals
+          hyprctl dispatch exec '[workspace 1 silent] ghostty --title="Claude Terminal" -e bash -c "cd ~/src/catch.ideas && claude --dangerously-skip-permissions"'
+          sleep 1
+          hyprctl dispatch exec '[workspace 1 silent] ghostty --title="Mprocs Terminal" -e bash -c "cd ~/src/catch.ideas && mprocs -c mprocs.yaml"'
           sleep 1
           
-          # Mprocs terminal (right half)  
-          ghostty --title="Mprocs Terminal" -e bash -c "cd ~/src/catch.ideas && mprocs -c mprocs.yaml" &
+          # Right monitor workspace 6: Emacs
+          hyprctl dispatch exec '[workspace 6 silent] emacs ~/src/catch.ideas'
           sleep 1
           
-          # Right monitor workspace 6: Emacs fullscreen
-          hyprctl dispatch workspace 6
-          
-          # Emacs with project (will appear fullscreen on right monitor)
-          emacs ~/src/catch.ideas &
-          sleep 1
-          
-          # Left monitor workspace 2: Browser + Documentation  
-          hyprctl dispatch workspace 2
-          firefox &
+          # Left monitor workspace 2: Browser + Documentation
+          hyprctl dispatch exec '[workspace 2 silent] firefox' 
           sleep 0.5
-          ghostty --title="Documentation" -e bash -c "cd ~/src/catch.ideas && bash" &
+          hyprctl dispatch exec '[workspace 2 silent] ghostty --title="Documentation" -e bash -c "cd ~/src/catch.ideas && bash"'
           sleep 1
           
           # Left monitor workspace 3: System monitoring
-          hyprctl dispatch workspace 3
-          ghostty --title="System Monitor" -e btop &
+          hyprctl dispatch exec '[workspace 3 silent] ghostty --title="System Monitor" -e btop'
           sleep 1
           
-          # Return to main development workspace
+          # Switch to main development workspace
           hyprctl dispatch workspace 1
         ''}"
       ];
