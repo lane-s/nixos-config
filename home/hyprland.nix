@@ -104,9 +104,9 @@
         "$mod SHIFT, k, movewindow, u"
         "$mod SHIFT, j, movewindow, d"
         
-        # Synchronized workspace switching (both monitors together)
+        # Synchronized workspace switching (both monitors together) 
         "$mod, 1, exec, hyprctl dispatch workspace 1 && hyprctl dispatch workspace 6"
-        "$mod, 2, exec, hyprctl dispatch workspace 2 && hyprctl dispatch workspace 7" 
+        "$mod, 2, exec, hyprctl dispatch workspace 2 && hyprctl dispatch workspace 7"
         "$mod, 3, exec, hyprctl dispatch workspace 3 && hyprctl dispatch workspace 8"
         "$mod, 4, workspace, 4"
         "$mod, 5, workspace, 5"
@@ -170,6 +170,7 @@
         "float, class:(pavucontrol)"
         "float, class:(nm-connection-editor)"
         
+        
         # Window sizing for terminals (no workspace assignment - handled by exec)
         "size 480 1080, class:(ghostty), title:^(Mprocs Terminal)$"    # Left half of left monitor
         "size 480 1080, class:(ghostty), title:^(Claude Terminal)$"    # Right half of left monitor
@@ -205,31 +206,25 @@
           # WORKSPACE 1+6: Development (Super+1)
           # Left monitor: mprocs (left) + claude (right)
           hyprctl dispatch exec '[workspace 1 silent] ghostty --title="Mprocs Terminal" -e bash -c "cd ~/src/catch.ideas && mprocs -c mprocs.yaml"'
-          sleep 1
           hyprctl dispatch exec '[workspace 1 silent] ghostty --title="Claude Terminal" -e bash -c "cd ~/src/catch.ideas && claude --dangerously-skip-permissions"'
-          sleep 1
           # Right monitor: emacs
           hyprctl dispatch exec '[workspace 6 silent] emacs ~/src/catch.ideas'
-          sleep 1
           
           # WORKSPACE 2+7: Browsing (Super+2)  
           # Left monitor: firefox
           hyprctl dispatch exec '[workspace 2 silent] firefox'
-          sleep 0.5
           # Right monitor: firefox
           hyprctl dispatch exec '[workspace 7 silent] firefox'
-          sleep 1
           
           # WORKSPACE 3+8: Monitoring (Super+3)
           # Left monitor: btop
           hyprctl dispatch exec '[workspace 3 silent] ghostty --title="System Monitor" -e btop'
-          sleep 0.5
-          # Right monitor: empty terminal for monitoring/logs
-          hyprctl dispatch exec '[workspace 8 silent] ghostty --title="Monitor Terminal" -e bash -c "cd ~/src/catch.ideas && bash"'
-          sleep 1
+          # Right monitor: config management terminal in /etc/nixos
+          hyprctl dispatch exec '[workspace 8 silent] ghostty --title="Config Terminal" -e bash -c "cd /etc/nixos && bash"'
           
-          # Switch to main development workspace
+          # Switch to main development workspace (both monitors)
           hyprctl dispatch workspace 1
+          hyprctl dispatch workspace 6
         ''}"
       ];
     };
