@@ -10,9 +10,9 @@
         # Default fallback for any unspecified monitor
         ",preferred,auto,1"
         
-        # Dual monitor setup - HDMI on left, DP on right
-        "HDMI-A-1,preferred,0x0,1"      # Left monitor
-        "DP-1,preferred,1920x0,1"        # Right monitor (adjust X position based on left monitor's width)
+        # Dual monitor setup - DP on left, HDMI on right (swapped positions)
+        "DP-1,preferred,0x0,1"           # Left monitor
+        "HDMI-A-1,preferred,1920x0,1"    # Right monitor
       ];
       
       # General settings
@@ -92,7 +92,7 @@
         "$mod SHIFT, f, fullscreen, 0"
         "$mod, Space, togglefloating,"
         
-        # Focus movement - vim/Emacs hybrid
+        # Focus movement - vim/Emacs hybrid (h=left, l=right)
         "$mod, h, movefocus, l"
         "$mod, l, movefocus, r"
         "$mod, k, movefocus, u"
@@ -151,12 +151,12 @@
         "$mod, mouse:273, resizewindow"
       ];
       
-      # Workspace rules - assign workspaces to monitors (swapped)
+      # Workspace rules - assign workspaces to monitors
       workspace = [
-        "1, monitor:HDMI-A-1, default:true" # Workspace 1 on left monitor (HDMI)
-        "2, monitor:DP-1, default:true"     # Workspace 2 on right monitor (DP)
-        "3, monitor:HDMI-A-1"               # System monitoring workspace
-        "4, monitor:DP-1"                   # Secondary utility workspace
+        "1, monitor:DP-1, default:true"     # Workspace 1 on left monitor (DP)
+        "2, monitor:HDMI-A-1, default:true" # Workspace 2 on right monitor (HDMI)
+        "3, monitor:DP-1"                   # System monitoring workspace
+        "4, monitor:HDMI-A-1"               # Secondary utility workspace
       ];
       
       # Window rules for specific applications
@@ -164,6 +164,9 @@
         # Float rules
         "float, class:(pavucontrol)"
         "float, class:(nm-connection-editor)"
+        
+        # Emacs rules
+        "fullscreen, class:(Emacs)"
         
         # Workspace assignments
         "workspace 1, class:(ghostty), title:(Primary Terminal)"
@@ -183,8 +186,8 @@
         # Status bar
         "waybar"
         
-        # Wallpaper (using swaybg)
-        "swaybg -o HDMI-A-1 -i /etc/nixos/829470.png -m fill -o DP-1 -i /etc/nixos/wp12852185-evangelion-4k-pc-wallpapers.jpg -m fill"
+        # Wallpaper (using swaybg) - Original Eva on left (DP-1), new Eva on right (HDMI-A-1)
+        "swaybg -o DP-1 -i /etc/nixos/wp12852185-evangelion-4k-pc-wallpapers.jpg -m fill -o HDMI-A-1 -i /etc/nixos/evangelion.jpg -m fill"
         
         # Wallpaper (using hyprpaper - uncomment to use)
         # "hyprpaper"
