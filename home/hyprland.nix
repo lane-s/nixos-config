@@ -104,10 +104,10 @@
         "$mod SHIFT, k, movewindow, u"
         "$mod SHIFT, j, movewindow, d"
         
-        # Workspace switching (like Emacs buffers)
-        "$mod, 1, workspace, 1"
-        "$mod, 2, workspace, 2"
-        "$mod, 3, workspace, 3"
+        # Synchronized workspace switching (both monitors together)
+        "$mod, 1, exec, hyprctl dispatch workspace 1 && hyprctl dispatch workspace 6"
+        "$mod, 2, exec, hyprctl dispatch workspace 2 && hyprctl dispatch workspace 7" 
+        "$mod, 3, exec, hyprctl dispatch workspace 3 && hyprctl dispatch workspace 8"
         "$mod, 4, workspace, 4"
         "$mod, 5, workspace, 5"
         "$mod, 6, workspace, 6"
@@ -151,17 +151,17 @@
         "$mod, mouse:273, resizewindow"
       ];
       
-      # Workspace assignment to monitors (reliable approach)
+      # Workspace assignment to monitors (synchronized pairs)
       workspace = [
-        # Left monitor (DP-3): workspaces 1-3 for terminals/development
-        "1, monitor:DP-3, default:true"
-        "2, monitor:DP-3"
-        "3, monitor:DP-3"
+        # Left monitor (DP-3): workspaces 1-3
+        "1, monitor:DP-3, default:true"    # Development: mprocs + claude
+        "2, monitor:DP-3"                  # Browsing: firefox
+        "3, monitor:DP-3"                  # Monitoring: btop
         
-        # Right monitor (DP-1): workspaces 6-8 for Emacs/docs  
-        "6, monitor:DP-1, default:true"
-        "7, monitor:DP-1"
-        "8, monitor:DP-1"
+        # Right monitor (DP-1): workspaces 6-8 (sync with left)
+        "6, monitor:DP-1, default:true"    # Development: emacs
+        "7, monitor:DP-1"                  # Browsing: firefox  
+        "8, monitor:DP-1"                  # Monitoring: terminal
       ];
       
       # Window rules for specific applications
@@ -171,8 +171,8 @@
         "float, class:(nm-connection-editor)"
         
         # Window sizing for terminals (no workspace assignment - handled by exec)
-        "size 480 1080, class:(ghostty), title:^(Claude Terminal)$"    # Left half of left monitor
-        "size 480 1080, class:(ghostty), title:^(Mprocs Terminal)$"    # Right half of left monitor
+        "size 480 1080, class:(ghostty), title:^(Mprocs Terminal)$"    # Left half of left monitor
+        "size 480 1080, class:(ghostty), title:^(Claude Terminal)$"    # Right half of left monitor
         "fullscreen, class:(ghostty), title:^(System Monitor)$"        # Fullscreen btop
         
         # Emacs sizing
@@ -202,26 +202,30 @@
         
         # Default layout setup using exec workspace assignment (reliable approach)
         "sleep 3 && ${pkgs.writeShellScript "setup-default-layout" ''
-          # Launch applications directly on their assigned workspaces
-          
-          # Left monitor workspace 1: Development terminals
-          hyprctl dispatch exec '[workspace 1 silent] ghostty --title="Claude Terminal" -e bash -c "cd ~/src/catch.ideas && claude --dangerously-skip-permissions"'
-          sleep 1
+          # WORKSPACE 1+6: Development (Super+1)
+          # Left monitor: mprocs (left) + claude (right)
           hyprctl dispatch exec '[workspace 1 silent] ghostty --title="Mprocs Terminal" -e bash -c "cd ~/src/catch.ideas && mprocs -c mprocs.yaml"'
           sleep 1
-          
-          # Right monitor workspace 6: Emacs
+          hyprctl dispatch exec '[workspace 1 silent] ghostty --title="Claude Terminal" -e bash -c "cd ~/src/catch.ideas && claude --dangerously-skip-permissions"'
+          sleep 1
+          # Right monitor: emacs
           hyprctl dispatch exec '[workspace 6 silent] emacs ~/src/catch.ideas'
           sleep 1
           
-          # Left monitor workspace 2: Browser + Documentation
-          hyprctl dispatch exec '[workspace 2 silent] firefox' 
+          # WORKSPACE 2+7: Browsing (Super+2)  
+          # Left monitor: firefox
+          hyprctl dispatch exec '[workspace 2 silent] firefox'
           sleep 0.5
-          hyprctl dispatch exec '[workspace 2 silent] ghostty --title="Documentation" -e bash -c "cd ~/src/catch.ideas && bash"'
+          # Right monitor: firefox
+          hyprctl dispatch exec '[workspace 7 silent] firefox'
           sleep 1
           
-          # Left monitor workspace 3: System monitoring
+          # WORKSPACE 3+8: Monitoring (Super+3)
+          # Left monitor: btop
           hyprctl dispatch exec '[workspace 3 silent] ghostty --title="System Monitor" -e btop'
+          sleep 0.5
+          # Right monitor: empty terminal for monitoring/logs
+          hyprctl dispatch exec '[workspace 8 silent] ghostty --title="Monitor Terminal" -e bash -c "cd ~/src/catch.ideas && bash"'
           sleep 1
           
           # Switch to main development workspace
