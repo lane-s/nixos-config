@@ -8,10 +8,12 @@
     # ../../modules/home-assistant.nix  # Uncomment to enable Home Assistant
   ];
 
-  # Boot configuration
+  # Boot configuration - BIOS/GRUB
   boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
+    grub = {
+      enable = true;
+      device = "/dev/sda"; # Install GRUB to the MBR
+    };
   };
 
   # Networking (NetworkManager configured in base.nix for Atheros support)
