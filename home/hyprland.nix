@@ -213,8 +213,8 @@
           # WORKSPACE 2+7: Extended Development (Super+2)  
           # Left monitor: chromium browser
           hyprctl dispatch exec '[workspace 2 silent] chromium'
-          # Right monitor: second emacs window with org-roam dailies
-          hyprctl dispatch exec '[workspace 7 silent] emacs --eval "(org-roam-dailies-goto-today)"'
+          # Right monitor: second emacs window with org-roam dailies (using Doom's command)
+          hyprctl dispatch exec '[workspace 7 silent] bash -c "sleep 5 && emacsclient -c -a emacs --eval \"(run-at-time 0.5 nil (lambda () (+org/goto-today)))\""'
           
           # WORKSPACE 3+8: Monitoring (Super+3)
           # Left monitor: btop
