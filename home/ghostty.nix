@@ -8,17 +8,16 @@
       font-family = JetBrainsMono Nerd Font
       font-size = 16
       
-      # Theme
-      theme = dark
+      # Colors (dark theme)
+      background = 1e1e1e
+      foreground = d4d4d4
       
       # Window
-      window-decoration = true
       window-padding-x = 10
       window-padding-y = 10
       
       # Cursor
       cursor-style = block
-      cursor-blink = true
     '';
   };
 }
