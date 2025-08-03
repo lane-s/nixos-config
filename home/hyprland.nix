@@ -93,14 +93,14 @@
         "$mod, Space, togglefloating,"
         
         # Focus movement - vim/Emacs hybrid (h=left, l=right) - swapped directions
-        "$mod, h, movefocus, r"
-        "$mod, l, movefocus, l"
+        "$mod, h, movefocus, l"
+        "$mod, l, movefocus, r"
         "$mod, k, movefocus, u"
         "$mod, j, movefocus, d"
         
         # Window movement
-        "$mod SHIFT, h, movewindow, r"
-        "$mod SHIFT, l, movewindow, l"
+        "$mod SHIFT, h, movewindow, l"
+        "$mod SHIFT, l, movewindow, r"
         "$mod SHIFT, k, movewindow, u"
         "$mod SHIFT, j, movewindow, d"
         
@@ -151,8 +151,18 @@
         "$mod, mouse:273, resizewindow"
       ];
       
-      # Global workspaces that span both monitors
-      # No workspace rules = workspaces can use both monitors
+      # Workspace assignment to monitors (reliable approach)
+      workspace = [
+        # Left monitor (DP-3): workspaces 1-3 for terminals/development
+        "1, monitor:DP-3, default:true"
+        "2, monitor:DP-3"
+        "3, monitor:DP-3"
+        
+        # Right monitor (DP-1): workspaces 6-8 for Emacs/docs  
+        "6, monitor:DP-1, default:true"
+        "7, monitor:DP-1"
+        "8, monitor:DP-1"
+      ];
       
       # Window rules for specific applications
       windowrulev2 = [
@@ -160,28 +170,22 @@
         "float, class:(pavucontrol)"
         "float, class:(nm-connection-editor)"
         
-        # Workspace 1: Development (spans both monitors)
+        # LEFT MONITOR (DP-3) - Terminals via workspace assignment
         "workspace 1, class:(ghostty), title:(Claude Terminal)"
         "workspace 1, class:(ghostty), title:(Mprocs Terminal)"
-        "workspace 1, class:(Emacs)"
+        "workspace 2, class:(firefox)"                              # Browser
+        "workspace 3, class:(ghostty), title:(System Monitor)"     # btop
         
-        # Workspace 2: Browser + docs
-        "workspace 2, class:(firefox)"
-        "workspace 2, class:(ghostty), title:(Documentation)"
+        # RIGHT MONITOR (DP-1) - Emacs via workspace assignment  
+        "workspace 6, class:(Emacs)"
+        "workspace 6, class:(emacs)"    # Case variation
+        "workspace 7, class:(ghostty), title:(Documentation)"
         
-        # Workspace 3: System monitoring  
-        "workspace 3, class:(ghostty), title:(System Monitor)"
-        
-        # Layout for workspace 1 (development)
+        # Window sizing (within their assigned workspaces/monitors)
         "size 480 1080, class:(ghostty), title:(Claude Terminal)"    # Left half of left monitor
-        "size 480 1080, class:(ghostty), title:(Mprocs Terminal)"    # Right half of left monitor  
-        "size 1920 1080, class:(Emacs)"                              # Full right monitor
-        
-        # Layout for workspace 2
-        "size 960 1080, class:(firefox)"                             # Left monitor half
-        "size 960 1080, class:(ghostty), title:(Documentation)"     # Right monitor half
-        
-        # Layout for workspace 3
+        "size 480 1080, class:(ghostty), title:(Mprocs Terminal)"    # Right half of left monitor
+        "fullscreen, class:(Emacs)"                                  # Fullscreen on right monitor
+        "fullscreen, class:(emacs)"                                  # Case variation
         "fullscreen, class:(ghostty), title:(System Monitor)"       # Fullscreen btop
       ];
       
@@ -207,41 +211,35 @@
         
         # Default layout setup
         "sleep 3 && ${pkgs.writeShellScript "setup-default-layout" ''
-          # Workspace 1: Development (spans both monitors)
+          # Left monitor workspace 1: Split terminals for development
           hyprctl dispatch workspace 1
           
-          # Left monitor split terminals
-          # Top-left: Claude terminal
+          # Claude terminal (left half)
           ghostty --title="Claude Terminal" -e bash -c "cd ~/src/catch.ideas && claude --dangerously-skip-permissions" &
           sleep 1
           
-          # Bottom-left: Mprocs for project processes  
+          # Mprocs terminal (right half)  
           ghostty --title="Mprocs Terminal" -e bash -c "cd ~/src/catch.ideas && mprocs -c mprocs.yaml" &
           sleep 1
           
-          # Right monitor: Emacs with project (fullscreen on right monitor)
+          # Right monitor workspace 6: Emacs fullscreen
+          hyprctl dispatch workspace 6
+          
+          # Emacs with project (will appear fullscreen on right monitor)
           emacs ~/src/catch.ideas &
           sleep 1
           
-          # Workspace 2: Browser + documentation
+          # Left monitor workspace 2: Browser
           hyprctl dispatch workspace 2
-          
-          # Left: Firefox for testing/research
           firefox &
           sleep 1
           
-          # Right: Documentation terminal
-          ghostty --title="Documentation" -e bash -c "cd ~/src/catch.ideas && bash" &
-          sleep 1
-          
-          # Workspace 3: System monitoring
+          # Left monitor workspace 3: System monitoring
           hyprctl dispatch workspace 3
-          
-          # Fullscreen btop for system monitoring
           ghostty --title="System Monitor" -e btop &
           sleep 1
           
-          # Return to workspace 1 for development
+          # Return to main development workspace
           hyprctl dispatch workspace 1
         ''}"
       ];
