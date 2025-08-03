@@ -1,0 +1,17 @@
+# Nix
+result
+result-*
+
+# Hardware configuration (generated per-machine)
+# Uncomment if you want to track hardware configs
+# hosts/*/hardware-configuration.nix
+
+# Temporary files
+*.swp
+*~
+.#*
+
+# Emacs
+*.elc
+.doom.d/.local/
+.doom.d/custom.el
