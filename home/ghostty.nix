@@ -18,6 +18,9 @@
       
       # Cursor
       cursor-style = block
+      
+      # Keybindings for Claude compatibility
+      keybind = shift+enter=text:\n
     '';
   };
 }
