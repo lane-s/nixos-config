@@ -79,4 +79,23 @@
             EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
     '';
   };
+
+  # Hardware support for i5-4690K and Atheros AR93xx
+  boot = {
+    # Ensure Atheros wireless drivers are loaded
+    kernelModules = [ "ath9k" ];
+    
+    # Microcode updates for Intel Haswell CPU
+    kernelParams = [ "intel_pstate=enable" ];
+  };
+
+  # Firmware for Atheros wireless
+  hardware.enableRedistributableFirmware = true;
+  
+  # Network configuration for Atheros wireless
+  networking.wireless.enable = false; # We use NetworkManager instead
+  networking.networkmanager = {
+    enable = true;
+    wifi.backend = "wpa_supplicant"; # Better for Atheros cards
+  };
 }

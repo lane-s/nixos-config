@@ -10,8 +10,8 @@
 
   # Home Manager configuration
   home = {
-    username = "youruser"; # Replace with your username
-    homeDirectory = "/home/youruser"; # Replace with your home directory
+    username = "lsp"; # Replace with your username
+    homeDirectory = "/home/lsp"; # Replace with your home directory
     stateVersion = "24.05";
   };
 
@@ -32,8 +32,9 @@
   # SSH
   programs.ssh = {
     enable = true;
-    startAgent = true;
   };
+  
+  services.ssh-agent.enable = true;
 
   # XDG configuration
   xdg = {

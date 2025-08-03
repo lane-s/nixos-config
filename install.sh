@@ -12,8 +12,8 @@ fi
 
 # Get user information
 read -p "Enter your username: " USERNAME
-read -p "Enter your hostname (default: dev-machine): " HOSTNAME
-HOSTNAME=${HOSTNAME:-dev-machine}
+read -p "Enter your hostname (default: lsp-desktop): " HOSTNAME
+HOSTNAME=${HOSTNAME:-lsp-desktop}
 
 # Enable flakes if not already enabled
 echo "Checking if flakes are enabled..."
@@ -27,7 +27,7 @@ fi
 # Update configuration files
 echo "Updating configuration files..."
 find . -type f -name "*.nix" -o -name "*.md" | while read -r file; do
-    sed -i "s/youruser/$USERNAME/g" "$file"
+    sed -i "s/lsp/$USERNAME/g" "$file"
     sed -i "s/dev-machine/$HOSTNAME/g" "$file"
 done
 
@@ -67,3 +67,6 @@ echo "To update your system later:"
 echo "  cd $(pwd)"
 echo "  nix flake update"
 echo "  sudo nixos-rebuild switch --flake .#$HOSTNAME"
+echo ""
+echo "Your configuration is also available at:"
+echo "  https://github.com/lane-s/nixos-config"

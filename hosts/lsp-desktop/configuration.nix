@@ -14,18 +14,15 @@
     efi.canTouchEfiVariables = true;
   };
 
-  # Networking
-  networking = {
-    hostName = "dev-machine"; # Replace with your hostname
-    networkmanager.enable = true;
-  };
+  # Networking (NetworkManager configured in base.nix for Atheros support)
+  networking.hostName = "lsp-desktop";
 
   # Time zone and localization
-  time.timeZone = "America/New_York"; # Adjust to your timezone
+  time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "en_US.UTF-8";
 
   # User configuration
-  users.users.youruser = { # Replace with your username
+  users.users.lsp = { # Replace with your username
     isNormalUser = true;
     description = "Your Name"; # Replace with your name
     extraGroups = [ "networkmanager" "wheel" "video" "audio" ];

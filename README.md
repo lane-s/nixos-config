@@ -22,19 +22,18 @@ For Ubuntu/Mint → NixOS migration, see `UBUNTU-TO-NIXOS.md`
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/yourusername/init-env.git ~/.init-env
+git clone https://github.com/lane-s/nixos-config.git ~/.init-env/nixos-config
 cd ~/.init-env/nixos-config
 ```
 
 2. Update the configuration files:
    - Replace `youruser` with your username in all files
-   - Replace `dev-machine` with your hostname
-   - Update hardware configuration: `sudo nixos-generate-config --show-hardware-config > hosts/dev-machine/hardware-configuration.nix`
+   - Update hardware configuration: `sudo nixos-generate-config --show-hardware-config > hosts/lsp-desktop/hardware-configuration.nix`
    - Adjust monitor configuration in `home/hyprland.nix`
 
 3. Build and switch to the new configuration:
 ```bash
-sudo nixos-rebuild switch --flake .#dev-machine
+sudo nixos-rebuild switch --flake .#lsp-desktop
 ```
 
 4. Reboot and log in to Hyprland

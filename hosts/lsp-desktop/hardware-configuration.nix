@@ -9,7 +9,7 @@
   # Kernel modules
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ]; # or "kvm-amd" for AMD
+  boot.kernelModules = [ "kvm-intel" ]; # i5-4690K uses Intel VT-x
   boot.extraModulePackages = [ ];
 
   # Filesystems - REPLACE WITH YOUR ACTUAL CONFIGURATION

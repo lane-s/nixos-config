@@ -10,7 +10,7 @@
       # Basic configuration
       homeassistant = {
         name = "Home";
-        time_zone = "America/New_York"; # Adjust to your timezone
+        time_zone = "Europe/Berlin"; # Adjust to your timezone
         latitude = "!secret latitude";
         longitude = "!secret longitude";
         elevation = "!secret elevation";
