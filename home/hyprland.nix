@@ -170,6 +170,9 @@
         "float, class:(pavucontrol)"
         "float, class:(nm-connection-editor)"
         
+        # Browser workspace assignment - use different browsers for different workspaces
+        "workspace 2, class:^(firefox)$"          # Firefox -> workspace 2 (left monitor)
+        "workspace 7, class:^(chromium)$"         # Chromium -> workspace 7 (right monitor)
         
         # Window sizing for terminals (no workspace assignment - handled by exec)
         "size 480 1080, class:(ghostty), title:^(Mprocs Terminal)$"    # Left half of left monitor
@@ -212,9 +215,9 @@
           
           # WORKSPACE 2+7: Browsing (Super+2)  
           # Left monitor: firefox
-          hyprctl dispatch exec '[workspace 2 silent] firefox'
-          # Right monitor: firefox
-          hyprctl dispatch exec '[workspace 7 silent] firefox'
+          hyprctl dispatch exec 'firefox'
+          # Right monitor: chromium (different browser to avoid conflicts)
+          hyprctl dispatch exec 'chromium'
           
           # WORKSPACE 3+8: Monitoring (Super+3)
           # Left monitor: btop
