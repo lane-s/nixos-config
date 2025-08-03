@@ -4,7 +4,7 @@
   # Emacs configuration
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs29-pgtk; # Pure GTK build for Wayland
+    package = pkgs.emacs30-pgtk; # Pure GTK build for Wayland
     extraPackages = epkgs: with epkgs; [
       vterm
       pdf-tools
