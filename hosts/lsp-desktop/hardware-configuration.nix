@@ -30,8 +30,23 @@
   # Or for AMD:
   # hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   
-  # Video drivers - covers your Guix video driver list
-  services.xserver.videoDrivers = [ "amdgpu" "nvidia" "nouveau" "modesetting" ];
+  # Video drivers - NVIDIA GTX 1080 Ti
+  services.xserver.videoDrivers = [ "nvidia" ];
+  
+  # NVIDIA Configuration for GTX 1080 Ti (Pascal generation)
+  hardware.nvidia = {
+    # Use closed source drivers for Pascal GPU
+    open = false;
+    
+    # Enable modesetting for better Wayland compatibility
+    modesetting.enable = true;
+    
+    # Power management (optional, mainly for laptops)
+    powerManagement.enable = false;
+    
+    # Use the stable driver
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
   
   # Enable firmware
   hardware.enableRedistributableFirmware = true;

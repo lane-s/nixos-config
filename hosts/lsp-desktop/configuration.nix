@@ -29,8 +29,7 @@
     shell = pkgs.bash;
   };
 
-  # Enable sound
-  sound.enable = true;
+  # Enable sound (sound.enable is deprecated, pipewire handles it)
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
