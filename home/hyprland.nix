@@ -151,12 +151,6 @@
         "$mod, mouse:273, resizewindow"
       ];
       
-      # Window rules
-      windowrule = [
-        "float, pavucontrol"
-        "float, nm-connection-editor"
-      ];
-      
       # Workspace rules - assign workspaces to monitors (swapped)
       workspace = [
         "1, monitor:HDMI-A-1, default:true" # Workspace 1 on left monitor (HDMI)
@@ -167,16 +161,14 @@
       
       # Window rules for specific applications
       windowrulev2 = [
-        # Workspace 1: Ghostty on left monitor
+        # Float rules
+        "float, class:(pavucontrol)"
+        "float, class:(nm-connection-editor)"
+        
+        # Workspace assignments
         "workspace 1, class:(ghostty), title:(Primary Terminal)"
-        
-        # Workspace 2: Emacs on right monitor
         "workspace 2, class:(Emacs)"
-        
-        # Workspace 3: btop on left monitor
         "workspace 3, class:(ghostty), title:(System Monitor - btop)"
-        
-        # Workspace 4: Logs/journals on right monitor
         "workspace 4, class:(ghostty), title:(System Logs)"
       ];
       
