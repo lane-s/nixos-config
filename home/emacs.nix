@@ -87,8 +87,8 @@
   # Script to install Doom Emacs on first run
   home.activation.installDoom = config.lib.dag.entryAfter ["writeBoundary"] ''
     if [ ! -d "$HOME/.emacs.d" ]; then
-      $DRY_RUN_CMD git clone --depth 1 https://github.com/doomemacs/doomemacs $HOME/.emacs.d
-      $DRY_RUN_CMD $HOME/.emacs.d/bin/doom install --no-env --no-fonts
+      $DRY_RUN_CMD ${pkgs.git}/bin/git clone --depth 1 https://github.com/doomemacs/doomemacs $HOME/.emacs.d
+      $DRY_RUN_CMD PATH="${pkgs.emacs}/bin:${pkgs.git}/bin:${pkgs.ripgrep}/bin:$PATH" $HOME/.emacs.d/bin/doom install --no-env --no-fonts
     fi
   '';
 }

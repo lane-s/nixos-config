@@ -30,6 +30,8 @@
     gzip
     unzip
     xz
+    # Additional tools needed for home-manager
+    home-manager
   ];
 
   # Enable documentation

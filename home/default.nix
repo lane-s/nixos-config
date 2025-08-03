@@ -18,7 +18,7 @@
   # Let Home Manager manage itself
   programs.home-manager.enable = true;
 
-  # Git configuration
+  # Git configuration - MUST be before activation scripts that use git
   programs.git = {
     enable = true;
     userName = "Your Name"; # Replace

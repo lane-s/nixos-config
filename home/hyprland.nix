@@ -10,12 +10,9 @@
         # Default fallback for any unspecified monitor
         ",preferred,auto,1"
         
-        # Example dual monitor setup - adjust to your actual hardware
-        # "DP-1,2560x1440@144,0x0,1"
-        # "HDMI-A-1,1920x1080@60,2560x0,1"
-        
-        # Laptop screen example
-        # "eDP-1,1920x1080@60,0x1440,1"
+        # Dual monitor setup - HDMI on left, DP on right
+        "HDMI-A-1,preferred,0x0,1"      # Left monitor
+        "DP-1,preferred,1920x0,1"        # Right monitor (adjust X position based on left monitor's width)
       ];
       
       # General settings
@@ -157,12 +154,12 @@
         "float, ^(nm-connection-editor)$"
       ];
       
-      # Workspace rules - assign workspaces to monitors
+      # Workspace rules - assign workspaces to monitors (swapped)
       workspace = [
-        "1, monitor:DP-1, default:true"    # Workspace 1 on left monitor
-        "2, monitor:HDMI-A-1, default:true" # Workspace 2 on right monitor
-        "3, monitor:DP-1"                  # System monitoring workspace
-        "4, monitor:HDMI-A-1"              # Secondary utility workspace
+        "1, monitor:HDMI-A-1, default:true" # Workspace 1 on left monitor (HDMI)
+        "2, monitor:DP-1, default:true"     # Workspace 2 on right monitor (DP)
+        "3, monitor:HDMI-A-1"               # System monitoring workspace
+        "4, monitor:DP-1"                   # Secondary utility workspace
       ];
       
       # Window rules for specific applications

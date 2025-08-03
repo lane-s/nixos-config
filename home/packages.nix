@@ -43,6 +43,7 @@
     # GUI applications
     firefox-wayland
     chromium
+    google-chrome
     
     # File management
     ranger
