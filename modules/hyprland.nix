@@ -53,6 +53,7 @@
     liberation_ttf
     fira-code
     fira-code-symbols
-    (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
+    nerd-fonts.fira-code
+    nerd-fonts.jetbrains-mono
   ];
 }
