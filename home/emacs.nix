@@ -49,7 +49,6 @@
     python3Packages.black
     python3Packages.pyflakes
     python3Packages.isort
-    python3Packages.nose
     python3Packages.pytest
     
     ## :lang rust
