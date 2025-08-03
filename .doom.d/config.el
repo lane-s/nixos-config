@@ -142,7 +142,7 @@
 
   (setq my-org-roam-context-alist
         `(("local" . ,(concat org-directory "/roam"))
-          ("l30" . ,("~/src/catch.ideas/roam"))
+          ("l30" . "~/src/catch.ideas/roam")
           ("shared" . ,(concat "~/.init-env" "/knowledge-base"))))
 
   (defun lsp/org-roam-switch-context (c)
