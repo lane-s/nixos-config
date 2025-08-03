@@ -41,7 +41,7 @@
 
   # Shell configuration
   programs.bash = {
-    enableCompletion = true;
+    completion.enable = true;
     shellAliases = {
       ll = "ls -lha";
       ls = "ls -p --color=auto";

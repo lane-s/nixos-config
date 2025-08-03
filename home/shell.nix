@@ -4,7 +4,6 @@
   # Bash configuration (porting your .bashrc)
   programs.bash = {
     enable = true;
-    enableCompletion = true;
     
     shellAliases = {
       # From your config
