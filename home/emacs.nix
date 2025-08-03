@@ -14,7 +14,7 @@
 
   # Link Doom config from this repo
   home.file.".doom.d" = {
-    source = ../. + "/.doom.d";
+    source = ./../.doom.d;
     recursive = true;
   };
 
