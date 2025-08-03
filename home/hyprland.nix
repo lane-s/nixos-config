@@ -211,8 +211,10 @@
           hyprctl dispatch exec '[workspace 6 silent] emacs ~/src/catch.ideas'
           
           # WORKSPACE 2+7: Extended Development (Super+2)  
+          # Left monitor: chromium browser
+          hyprctl dispatch exec '[workspace 2 silent] chromium'
           # Right monitor: second emacs window with org-roam dailies
-          hyprctl dispatch exec '[workspace 7 silent] emacs -e "(org-roam-dailies-goto-today)"'
+          hyprctl dispatch exec '[workspace 7 silent] emacs --eval "(org-roam-dailies-goto-today)"'
           
           # WORKSPACE 3+8: Monitoring (Super+3)
           # Left monitor: btop
