@@ -155,13 +155,13 @@
       workspace = [
         # Left monitor (DP-3): workspaces 1-3
         "1, monitor:DP-3, default:true"    # Development: mprocs + claude
-        "2, monitor:DP-3"                  # Browsing: firefox
+        "2, monitor:DP-3"                  # Extended dev: empty for now
         "3, monitor:DP-3"                  # Monitoring: btop
         
         # Right monitor (DP-1): workspaces 6-8 (sync with left)
         "6, monitor:DP-1, default:true"    # Development: emacs
-        "7, monitor:DP-1"                  # Browsing: firefox  
-        "8, monitor:DP-1"                  # Monitoring: terminal
+        "7, monitor:DP-1"                  # Extended dev: second emacs  
+        "8, monitor:DP-1"                  # Monitoring: config terminal
       ];
       
       # Window rules for specific applications
@@ -170,9 +170,6 @@
         "float, class:(pavucontrol)"
         "float, class:(nm-connection-editor)"
         
-        # Browser workspace assignment - use different browsers for different workspaces
-        "workspace 2, class:^(firefox)$"          # Firefox -> workspace 2 (left monitor)
-        "workspace 7, class:^(chromium)$"         # Chromium -> workspace 7 (right monitor)
         
         # Window sizing for terminals (no workspace assignment - handled by exec)
         "size 480 1080, class:(ghostty), title:^(Mprocs Terminal)$"    # Left half of left monitor
@@ -213,11 +210,9 @@
           # Right monitor: emacs
           hyprctl dispatch exec '[workspace 6 silent] emacs ~/src/catch.ideas'
           
-          # WORKSPACE 2+7: Browsing (Super+2)  
-          # Left monitor: firefox
-          hyprctl dispatch exec 'firefox'
-          # Right monitor: chromium (different browser to avoid conflicts)
-          hyprctl dispatch exec 'chromium'
+          # WORKSPACE 2+7: Extended Development (Super+2)  
+          # Right monitor: second emacs window with org-roam dailies
+          hyprctl dispatch exec '[workspace 7 silent] emacs -e "(org-roam-dailies-goto-today)"'
           
           # WORKSPACE 3+8: Monitoring (Super+3)
           # Left monitor: btop
