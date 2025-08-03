@@ -5,12 +5,7 @@
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-  };
-
-  # XDG portal for Wayland
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+    # The flake module automatically sets up the portal
   };
 
   # Required services for Wayland
