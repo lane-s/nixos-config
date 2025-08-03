@@ -6,6 +6,7 @@
     ./shell.nix
     ./hyprland.nix
     ./emacs.nix
+    ./ghostty.nix
   ];
 
   # Home Manager configuration

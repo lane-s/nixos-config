@@ -263,7 +263,7 @@
     style = ''
       * {
         font-family: "JetBrainsMono Nerd Font";
-        font-size: 13px;
+        font-size: 16px;
       }
       
       window#waybar {
