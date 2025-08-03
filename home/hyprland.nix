@@ -170,16 +170,18 @@
         "float, class:(pavucontrol)"
         "float, class:(nm-connection-editor)"
         
-        # LEFT MONITOR (DP-3) - Terminals via workspace assignment
+        # LEFT MONITOR (DP-3) - Specific Ghostty windows by title
         "workspace 1, class:(ghostty), title:(Claude Terminal)"
         "workspace 1, class:(ghostty), title:(Mprocs Terminal)"
-        "workspace 2, class:(firefox)"                              # Browser
-        "workspace 3, class:(ghostty), title:(System Monitor)"     # btop
+        "workspace 2, class:(firefox)"                              
+        "workspace 3, class:(ghostty), title:(System Monitor)"     
         
-        # RIGHT MONITOR (DP-1) - Emacs via workspace assignment  
+        # RIGHT MONITOR (DP-1) - Emacs only (no Ghostty should go here)
         "workspace 6, class:(Emacs)"
         "workspace 6, class:(emacs)"    # Case variation
-        "workspace 7, class:(ghostty), title:(Documentation)"
+        
+        # Documentation terminal goes to left monitor workspace 2
+        "workspace 2, class:(ghostty), title:(Documentation)"
         
         # Window sizing (within their assigned workspaces/monitors)
         "size 480 1080, class:(ghostty), title:(Claude Terminal)"    # Left half of left monitor
@@ -229,9 +231,11 @@
           emacs ~/src/catch.ideas &
           sleep 1
           
-          # Left monitor workspace 2: Browser
+          # Left monitor workspace 2: Browser + Documentation  
           hyprctl dispatch workspace 2
           firefox &
+          sleep 0.5
+          ghostty --title="Documentation" -e bash -c "cd ~/src/catch.ideas && bash" &
           sleep 1
           
           # Left monitor workspace 3: System monitoring
