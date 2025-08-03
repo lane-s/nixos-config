@@ -60,9 +60,12 @@
     python3Packages.pip
     python3Packages.virtualenv
     
-    # Node.js (for Doom Emacs packages)
+    # Node.js (for Doom Emacs packages and npm)
     nodejs
-    nodePackages.npm
+    
+    # Claude CLI (official Anthropic tool)
+    claude-code
+    
     
     # Fonts and themes
     papirus-icon-theme

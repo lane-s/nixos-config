@@ -47,6 +47,13 @@
       # Better defaults
       export LESS="-R"
       export GREP_COLOR="1;33"
+      
+      # NPM global directory
+      export NPM_CONFIG_PREFIX="$HOME/.npm-global"
+      export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
+      
+      # Ensure project directory exists
+      mkdir -p ~/src/catch.ideas
     '';
     
     profileExtra = ''

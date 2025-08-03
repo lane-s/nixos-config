@@ -157,6 +157,29 @@
         "float, ^(nm-connection-editor)$"
       ];
       
+      # Workspace rules - assign workspaces to monitors
+      workspace = [
+        "1, monitor:DP-1, default:true"    # Workspace 1 on left monitor
+        "2, monitor:HDMI-A-1, default:true" # Workspace 2 on right monitor
+        "3, monitor:DP-1"                  # System monitoring workspace
+        "4, monitor:HDMI-A-1"              # Secondary utility workspace
+      ];
+      
+      # Window rules for specific applications
+      windowrulev2 = [
+        # Workspace 1: Ghostty on left monitor
+        "workspace 1, class:^(ghostty)$, title:^(Primary Terminal)$"
+        
+        # Workspace 2: Emacs on right monitor
+        "workspace 2, class:^(Emacs)$"
+        
+        # Workspace 3: btop on left monitor
+        "workspace 3, class:^(ghostty)$, title:^(System Monitor - btop)$"
+        
+        # Workspace 4: Logs/journals on right monitor
+        "workspace 4, class:^(ghostty)$, title:^(System Logs)$"
+      ];
+      
       # Startup applications
       exec-once = [
         # Start Emacs daemon
@@ -173,6 +196,31 @@
         
         # Polkit agent
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
+        
+        # Default layout setup
+        "sleep 2 && ${pkgs.writeShellScript "setup-default-layout" ''
+          # Primary workspace: catch.ideas project
+          # Left monitor: Ghostty with Claude in project directory
+          ghostty --title="Primary Terminal" -e bash -c "cd ~/src/catch.ideas && claude --dangerously-skip-permissions" &
+          sleep 0.5
+          
+          # Right monitor: Emacs with project and magit
+          emacsclient -c ~/src/catch.ideas -e "(magit-status)" &
+          
+          # System monitoring workspace
+          sleep 1
+          hyprctl dispatch workspace 3
+          ghostty --title="System Monitor - btop" -e btop &
+          
+          # System logs workspace  
+          sleep 0.5
+          hyprctl dispatch workspace 4
+          ghostty --title="System Logs" -e "journalctl -f" &
+          
+          # Return to primary workspace
+          sleep 0.5
+          hyprctl dispatch workspace 1
+        ''}"
       ];
     };
   };

@@ -49,4 +49,12 @@
       videos = "${config.home.homeDirectory}/Videos";
     };
   };
+  
+  # Create project directory on activation
+  home.activation = {
+    ensureProjectDir = config.lib.dag.entryAfter ["writeBoundary"] ''
+      # Create project directory if it doesn't exist
+      $DRY_RUN_CMD mkdir -p ~/src/catch.ideas
+    '';
+  };
 }
