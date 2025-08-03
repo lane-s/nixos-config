@@ -49,6 +49,9 @@
     git
   ];
 
+  # Allow unfree packages (needed for NVIDIA drivers)
+  nixpkgs.config.allowUnfree = true;
+
   # This value determines the NixOS release
   system.stateVersion = "24.05";
 }
