@@ -12,7 +12,7 @@
   boot.loader = {
     grub = {
       enable = true;
-      device = "/dev/sda"; # Install GRUB to the MBR
+      device = "/dev/sdb"; # Install GRUB to the MBR
     };
   };
 
