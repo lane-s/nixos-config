@@ -165,14 +165,19 @@
         "float, class:(pavucontrol)"
         "float, class:(nm-connection-editor)"
         
-        # Emacs rules
-        "fullscreen, class:(Emacs)"
+        # Workspace 1: Development
+        "workspace 1, class:(ghostty), title:(Claude Terminal)"
+        "workspace 1, class:(Emacs)"
         
-        # Workspace assignments
-        "workspace 1, class:(ghostty), title:(Primary Terminal)"
-        "workspace 2, class:(Emacs)"
-        "workspace 3, class:(ghostty), title:(System Monitor - btop)"
-        "workspace 4, class:(ghostty), title:(System Logs)"
+        # Workspace 2: Browser and monitoring
+        "workspace 2, class:(firefox)"
+        "workspace 2, class:(ghostty), title:(System Monitor)"
+        
+        # Monitor assignments for stable layout
+        "size 960 1080, class:(ghostty), title:(Claude Terminal)"    # Half width on left
+        "size 960 1080, class:(Emacs)"                               # Half width on right  
+        "size 960 1080, class:(firefox)"                             # Half width on left
+        "size 960 1080, class:(ghostty), title:(System Monitor)"    # Half width on right
       ];
       
       # Startup applications
@@ -196,27 +201,31 @@
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         
         # Default layout setup
-        "sleep 2 && ${pkgs.writeShellScript "setup-default-layout" ''
-          # Primary workspace: catch.ideas project
+        "sleep 3 && ${pkgs.writeShellScript "setup-default-layout" ''
+          # Workspace 1: Development workspace
+          # Start on workspace 1
+          hyprctl dispatch workspace 1
+          
           # Left monitor: Ghostty with Claude in project directory
-          ghostty --title="Primary Terminal" -e bash -c "cd ~/src/catch.ideas && bash" &
-          sleep 0.5
-          
-          # Right monitor: Emacs with project and magit
-          emacsclient -c ~/src/catch.ideas -e "(magit-status)" &
-          
-          # System monitoring workspace
+          ghostty --title="Claude Terminal" -e bash -c "cd ~/src/catch.ideas && claude --dangerously-skip-permissions" &
           sleep 1
-          hyprctl dispatch workspace 3
-          ghostty --title="System Monitor - btop" -e btop &
           
-          # System logs workspace  
-          sleep 0.5
-          hyprctl dispatch workspace 4
-          ghostty --title="System Logs" -e "journalctl -f" &
+          # Right monitor: Emacs with project (start directly, not via daemon)
+          emacs ~/src/catch.ideas &
+          sleep 1
           
-          # Return to primary workspace
-          sleep 0.5
+          # Workspace 2: Browser and monitoring
+          hyprctl dispatch workspace 2
+          
+          # Left monitor: Firefox
+          firefox &
+          sleep 1
+          
+          # Right monitor: btop system monitor
+          ghostty --title="System Monitor" -e btop &
+          sleep 1
+          
+          # Return to workspace 1 for development
           hyprctl dispatch workspace 1
         ''}"
       ];
