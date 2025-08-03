@@ -191,8 +191,11 @@
         # Status bar
         "waybar"
         
-        # Wallpaper
-        "swaybg -i ~/Pictures/wallpaper.jpg -m fill"
+        # Wallpaper (using swaybg)
+        "swaybg -o HDMI-A-1 -i /etc/nixos/829470.png -m fill -o DP-1 -i /etc/nixos/wp12852185-evangelion-4k-pc-wallpapers.jpg -m fill"
+        
+        # Wallpaper (using hyprpaper - uncomment to use)
+        # "hyprpaper"
         
         # Polkit agent
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
