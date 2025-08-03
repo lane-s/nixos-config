@@ -4,7 +4,7 @@
   # Emacs configuration
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs30-pgtk; # Pure GTK build for Wayland
+    package = pkgs.emacs30; # Regular build instead of PGTK
     extraPackages = epkgs: with epkgs; [
       vterm
       pdf-tools
@@ -65,13 +65,16 @@
     libvterm
   ];
 
-  # Environment variables for Wayland
+  # Environment variables for Emacs
   home.sessionVariables = {
-    # Use Wayland for Emacs
+    # Emacs daemon socket
     EMACS_SOCKET_NAME = "server";
     
     # Ensure Emacs uses native compilation cache in user directory
     NATIVE_FULL_AOT = "1";
+    
+    # Help Emacs work better with Wayland
+    GDK_BACKEND = "wayland,x11";
   };
 
   # Systemd service for Emacs daemon

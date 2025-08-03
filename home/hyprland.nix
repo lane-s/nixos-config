@@ -10,9 +10,9 @@
         # Default fallback for any unspecified monitor
         ",preferred,auto,1"
         
-        # Dual monitor setup - DP on left, HDMI on right (swapped positions)
+        # Dual monitor setup - DP-1 on left, DP-3 on right
         "DP-1,preferred,0x0,1"           # Left monitor
-        "HDMI-A-1,preferred,1920x0,1"    # Right monitor
+        "DP-3,preferred,1920x0,1"        # Right monitor
       ];
       
       # General settings
@@ -78,7 +78,7 @@
         "$mod, Return, exec, ghostty"
         
         # Emacs
-        "$mod, e, exec, emacsclient -c -a 'emacs'"
+        "$mod, e, exec, emacsclient -c -a emacs"
         "$mod SHIFT, e, exec, emacs"
         
         # Application launcher (like M-x in Emacs)
@@ -92,15 +92,15 @@
         "$mod SHIFT, f, fullscreen, 0"
         "$mod, Space, togglefloating,"
         
-        # Focus movement - vim/Emacs hybrid (h=left, l=right)
-        "$mod, h, movefocus, l"
-        "$mod, l, movefocus, r"
+        # Focus movement - vim/Emacs hybrid (h=left, l=right) - swapped directions
+        "$mod, h, movefocus, r"
+        "$mod, l, movefocus, l"
         "$mod, k, movefocus, u"
         "$mod, j, movefocus, d"
         
         # Window movement
-        "$mod SHIFT, h, movewindow, l"
-        "$mod SHIFT, l, movewindow, r"
+        "$mod SHIFT, h, movewindow, r"
+        "$mod SHIFT, l, movewindow, l"
         "$mod SHIFT, k, movewindow, u"
         "$mod SHIFT, j, movewindow, d"
         
@@ -153,10 +153,10 @@
       
       # Workspace rules - assign workspaces to monitors
       workspace = [
-        "1, monitor:DP-1, default:true"     # Workspace 1 on left monitor (DP)
-        "2, monitor:HDMI-A-1, default:true" # Workspace 2 on right monitor (HDMI)
+        "1, monitor:DP-1, default:true"     # Workspace 1 on left monitor (DP-1)
+        "2, monitor:DP-3, default:true"     # Workspace 2 on right monitor (DP-3)
         "3, monitor:DP-1"                   # System monitoring workspace
-        "4, monitor:HDMI-A-1"               # Secondary utility workspace
+        "4, monitor:DP-3"                   # Secondary utility workspace
       ];
       
       # Window rules for specific applications
@@ -186,8 +186,8 @@
         # Status bar
         "waybar"
         
-        # Wallpaper (using swaybg) - Original Eva on left (DP-1), new Eva on right (HDMI-A-1)
-        "swaybg -o DP-1 -i /etc/nixos/wp12852185-evangelion-4k-pc-wallpapers.jpg -m fill -o HDMI-A-1 -i /etc/nixos/evangelion.jpg -m fill"
+        # Wallpaper (using swaybg) - Original Eva on left (DP-1), new Eva on right (DP-3)
+        "swaybg -o DP-1 -i /etc/nixos/wp12852185-evangelion-4k-pc-wallpapers.jpg -m fill -o DP-3 -i /etc/nixos/evangelion.jpg -m fill"
         
         # Wallpaper (using hyprpaper - uncomment to use)
         # "hyprpaper"
