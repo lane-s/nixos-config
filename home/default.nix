@@ -7,6 +7,7 @@
     ./hyprland.nix
     ./emacs.nix
     ./ghostty.nix
+    ./btop.nix
   ];
 
   # Home Manager configuration
