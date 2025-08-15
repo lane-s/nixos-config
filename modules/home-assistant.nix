@@ -128,21 +128,35 @@
     };
     
     script = ''
-      # Link the config from the repo if it doesn't exist
-      if [ ! -f /var/lib/hass/configuration.yaml ]; then
-        echo "Setting up Home Assistant configuration..."
-        mkdir -p /var/lib/hass
+      echo "Setting up Home Assistant configuration..."
+      mkdir -p /var/lib/hass
+      
+      # Symlink YAML config files from nixos repo
+      if [ -d /etc/nixos/homeassistant_cfg ]; then
+        echo "Linking configuration files from repo..."
         
-        # Copy files from the nixos-config (will be in /etc/nixos after install)
-        if [ -d /etc/nixos/homeassistant_cfg ]; then
-          cp -r /etc/nixos/homeassistant_cfg/* /var/lib/hass/
-          chown -R hass:hass /var/lib/hass
-          chmod -R u+rw /var/lib/hass
-          echo "Home Assistant configuration copied from repo."
-        else
-          echo "No configuration found at /etc/nixos/homeassistant_cfg"
-          echo "Please manually copy your configuration to /var/lib/hass"
+        # Symlink all YAML files
+        for file in /etc/nixos/homeassistant_cfg/*.yaml; do
+          if [ -f "$file" ]; then
+            filename=$(basename "$file")
+            ln -sf "$file" "/var/lib/hass/$filename"
+            echo "Linked $filename"
+          fi
+        done
+        
+        # Copy blueprints directory (needs to be writable)
+        if [ -d /etc/nixos/homeassistant_cfg/blueprints ]; then
+          cp -r /etc/nixos/homeassistant_cfg/blueprints /var/lib/hass/
+          echo "Copied blueprints directory"
         fi
+        
+        # Ensure proper ownership
+        chown -R hass:hass /var/lib/hass
+        
+        echo "Home Assistant configuration linked from repo."
+      else
+        echo "No configuration found at /etc/nixos/homeassistant_cfg"
+        echo "Please add your configuration to the repo"
       fi
     '';
   };
