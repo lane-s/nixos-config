@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "trace.saved_traces",
+  "data": {
+    "script.monitors_off": [
+      {
+        "extended_dict": {
+          "last_step": "sequence/0",
+          "run_id": "9c8aebb1d0c4829adfc7ff109e6ade9a",
+          "state": "stopped",
+          "script_execution": "finished",
+          "timestamp": {
+            "start": "2025-06-21T21:45:09.512094+00:00",
+            "finish": "2025-06-21T21:45:09.813209+00:00"
+          },
+          "domain": "script",
+          "item_id": "monitors_off",
+          "trace": {
+            "sequence/0": [
+              {
+                "path": "sequence/0",
+                "timestamp": "2025-06-21T21:45:09.512871+00:00",
+                "changed_variables": {
+                  "this": {
+                    "entity_id": "script.monitors_off",
+                    "state": "off",
+                    "attributes": {
+                      "last_triggered": "2025-04-16T23:01:16.216269+00:00",
+                      "mode": "single",
+                      "current": 0,
+                      "icon": "mdi:monitor-off",
+                      "friendly_name": "monitors_off"
+                    },
+                    "last_changed": "2025-06-21T15:31:05.870929+00:00",
+                    "last_reported": "2025-06-21T15:31:05.870929+00:00",
+                    "last_updated": "2025-06-21T15:31:05.870929+00:00",
+                    "context": {
+                      "id": "01JY9HTRGEJMNSAYEFXJ399E9S",
+                      "parent_id": null,
+                      "user_id": null
+                    }
+                  },
+                  "context": {
+                    "id": "01JYA77P47K8PRGJV0H0Q9BX43",
+                    "parent_id": null,
+                    "user_id": null
+                  }
+                },
+                "result": {
+                  "params": {
+                    "domain": "shell_command",
+                    "service": "monitors_off",
+                    "service_data": {},
+                    "target": {}
+                  },
+                  "running_script": false
+                }
+              }
+            ]
+          },
+          "config": {
+            "icon": "mdi:monitor-off",
+            "sequence": [
+              {
+                "action": "shell_command.monitors_off"
+              }
+            ]
+          },
+          "blueprint_inputs": null,
+          "context": {
+            "id": "01JYA77P47K8PRGJV0H0Q9BX43",
+            "parent_id": null,
+            "user_id": null
+          }
+        },
+        "short_dict": {
+          "last_step": "sequence/0",
+          "run_id": "9c8aebb1d0c4829adfc7ff109e6ade9a",
+          "state": "stopped",
+          "script_execution": "finished",
+          "timestamp": {
+            "start": "2025-06-21T21:45:09.512094+00:00",
+            "finish": "2025-06-21T21:45:09.813209+00:00"
+          },
+          "domain": "script",
+          "item_id": "monitors_off"
+        }
+      },
+      {
+        "extended_dict": {
+          "last_step": "sequence/0",
+          "run_id": "264ff7c0260df0b7c943afa06c23a05e",
+          "state": "stopped",
+          "script_execution": "finished",
+          "timestamp": {
+            "start": "2025-06-30T20:46:49.324322+00:00",
+            "finish": "2025-06-30T20:46:49.616117+00:00"
+          },
+          "domain": "script",
+          "item_id": "monitors_off",
+          "trace": {
+            "sequence/0": [
+              {
+                "path": "sequence/0",
+                "timestamp": "2025-06-30T20:46:49.324465+00:00",
+                "changed_variables": {
+                  "this": {
+                    "entity_id": "script.monitors_off",
+                    "state": "off",
+                    "attributes": {
+                      "last_triggered": "2025-06-21T21:45:09.512377+00:00",
+                      "mode": "single",
+                      "current": 0,
+                      "icon": "mdi:monitor-off",
+                      "friendly_name": "monitors_off"
+                    },
+                    "last_changed": "2025-06-21T21:45:09.813112+00:00",
+                    "last_reported": "2025-06-21T21:45:09.813112+00:00",
+                    "last_updated": "2025-06-21T21:45:09.813112+00:00",
+                    "context": {
+                      "id": "01JYA77P47K8PRGJV0H0Q9BX43",
+                      "parent_id": null,
+                      "user_id": null
+                    }
+                  },
+                  "context": {
+                    "id": "01JZ19FAZCR102NBQ5Z9WT671E",
+                    "parent_id": null,
+                    "user_id": null
+                  }
+                },
+                "result": {
+                  "params": {
+                    "domain": "shell_command",
+                    "service": "monitors_off",
+                    "service_data": {},
+                    "target": {}
+                  },
+                  "running_script": false
+                }
+              }
+            ]
+          },
+          "config": {
+            "icon": "mdi:monitor-off",
+            "sequence": [
+              {
+                "action": "shell_command.monitors_off"
+              }
+            ]
+          },
+          "blueprint_inputs": null,
+          "context": {
+            "id": "01JZ19FAZCR102NBQ5Z9WT671E",
+            "parent_id": null,
+            "user_id": null
+          }
+        },
+        "short_dict": {
+          "last_step": "sequence/0",
+          "run_id": "264ff7c0260df0b7c943afa06c23a05e",
+          "state": "stopped",
+          "script_execution": "finished",
+          "timestamp": {
+            "start": "2025-06-30T20:46:49.324322+00:00",
+            "finish": "2025-06-30T20:46:49.616117+00:00"
+          },
+          "domain": "script",
+          "item_id": "monitors_off"
+        }
+      }
+    ]
+  }
+}

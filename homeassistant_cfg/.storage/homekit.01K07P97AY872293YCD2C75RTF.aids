@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "homekit.01K07P97AY872293YCD2C75RTF.aids",
+  "data": {
+    "allocations": {
+      "script.script.monitors_off": 3403685994,
+      "group.switch.studio_switches": 2099862555,
+      "template.switch.everything_off_switch": 159469873,
+      "tplink.switch.8022E8EF1CB15FFA105C8E5C31A2CD632331CD6F": 2648456661
+    }
+  }
+}

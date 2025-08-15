@@ -1,0 +1,7 @@
+display_off:
+  sequence:
+  - action: shell_command.monitors_off
+    metadata: {}
+    data: {}
+  alias: Display Off
+  description: ''

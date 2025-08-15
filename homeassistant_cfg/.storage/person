@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "minor_version": 1,
+  "key": "person",
+  "data": {
+    "items": [
+      {
+        "id": "lane",
+        "name": "Lane",
+        "user_id": "672d8a4c2f654d4489d5f979128472ad",
+        "device_trackers": [
+          "device_tracker.iphone_von_lane"
+        ],
+        "picture": null
+      }
+    ]
+  }
+}

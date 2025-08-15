@@ -5,7 +5,7 @@
     ./hardware-configuration.nix
     ../../modules/base.nix
     ../../modules/hyprland.nix
-    # ../../modules/home-assistant.nix  # Uncomment to enable Home Assistant
+    ../../modules/home-assistant.nix  # Uncomment to enable Home Assistant
   ];
 
   # Boot configuration - BIOS/GRUB

@@ -1,0 +1,62 @@
+
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+# automation: !include automations.yaml
+# script: !include scripts.yaml
+scene: !include scenes.yaml
+
+shell_command:
+  monitors_off: 'hyprctl dispatch dpms off'
+  monitors_on: 'hyprctl dispatch dpms on'
+
+switch:
+  - platform: group
+    name: Studio
+    unique_id: studio_switches
+    entities:
+      - switch.clarett
+      - switch.sub
+      - switch.speakers
+  - platform: template
+    switches:
+      everything_off:
+        friendly_name: "Everything Off"
+        unique_id: everything_off_switch
+        icon_template: "mdi:power"
+        turn_on:
+          - service: scene.turn_on
+            target:
+              entity_id: scene.previous_states
+        turn_off:
+          - service: scene.create
+            data:
+              scene_id: previous_states
+              snapshot_entities:
+                - switch.lamp
+                - switch.studio
+          - service: switch.turn_off
+            target:
+              entity_id: switch.lamp
+          - service: switch.turn_off
+            target:
+              entity_id: switch.studio
+          - service: shell_command.monitors_off
+
+script:
+  monitors_off:
+    icon: "mdi:monitor-off"
+    sequence:
+      - service: shell_command.monitors_off
+
+homekit:
+  filter:
+    include_entities:
+      - script.monitors_off
+      - switch.studio
+      - switch.lamp
+      - switch.everything_off

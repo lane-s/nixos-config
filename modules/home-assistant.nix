@@ -100,21 +100,21 @@
   # };
   
   # Backup service for Home Assistant
-  services.restic.backups.home-assistant = {
-    enable = true;
-    paths = [ "/var/lib/hass" ];
-    repository = "/backup/home-assistant"; # Adjust backup location
-    passwordFile = "/etc/nixos/secrets/restic-password";
-    timerConfig = {
-      OnCalendar = "daily";
-      Persistent = true;
-    };
-    pruneOpts = [
-      "--keep-daily 7"
-      "--keep-weekly 4"
-      "--keep-monthly 12"
-    ];
-  };
+  # services.restic.backups.home-assistant = {
+  #   enable = true;
+  #   paths = [ "/var/lib/hass" ];
+  #   repository = "/backup/home-assistant"; # Adjust backup location
+  #   passwordFile = "/etc/nixos/secrets/restic-password";
+  #   timerConfig = {
+  #     OnCalendar = "daily";
+  #     Persistent = true;
+  #   };
+  #   pruneOpts = [
+  #     "--keep-daily 7"
+  #     "--keep-weekly 4"
+  #     "--keep-monthly 12"
+  #   ];
+  # };
   
   # Create systemd service to link config on first boot
   systemd.services.setup-home-assistant-config = {

@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "homekit.01JZGSQSCB4JA5R3BDJ9EG7G1Z.aids",
+  "data": {
+    "allocations": {
+      "group.switch.studio_switches": 2099862555,
+      "template.switch.everything_off_switch": 159469873,
+      "tplink.switch.80229D454FCAF73DCA973E39C03EF4D62329721A": 2256462351,
+      "tplink.switch.8022BB135BAEA9C82706E54D3BD85F7E232FEF35": 795691684,
+      "tplink.switch.8022E8EF1CB15FFA105C8E5C31A2CD632331CD6F": 2648456661,
+      "tplink.switch.8022CFBE816D7F09F8E6E620F053F06A231E3220": 4202280569
+    }
+  }
+}

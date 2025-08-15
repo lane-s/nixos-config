@@ -1,0 +1,194 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "core.restore_state",
+  "data": [
+    {
+      "state": {"entity_id":"person.lane","state":"home","attributes":{"editable":true,"id":"lane","device_trackers":["device_tracker.iphone_von_lane"],"latitude":52.5520272952287,"longitude":13.358956185748442,"gps_accuracy":13,"source":"device_tracker.iphone_von_lane","user_id":"672d8a4c2f654d4489d5f979128472ad","friendly_name":"Lane"},"last_changed":"2025-07-19T17:12:49.682680+00:00","last_reported":"2025-08-02T13:50:33.917126+00:00","last_updated":"2025-08-02T13:50:33.917126+00:00","context":{"id":"01K1NGRVXXZJJC5EV1KH79YV64","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2025-08-03T09:26:51.304415+00:00"
+    },
+    {
+      "state": {"entity_id":"script.monitors_off","state":"off","attributes":{"last_triggered":"2025-07-15T01:12:23.925091+00:00","mode":"single","current":0,"icon":"mdi:monitor-off","friendly_name":"monitors_off"},"last_changed":"2025-07-15T18:41:48.785070+00:00","last_reported":"2025-07-15T18:41:48.785070+00:00","last_updated":"2025-07-15T18:41:48.785070+00:00","context":{"id":"01K07P977H4X5E0QF5QSWMBW8Z","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2025-08-03T09:26:51.304415+00:00"
+    },
+    {
+      "state": {"entity_id":"conversation.home_assistant","state":"unknown","attributes":{"friendly_name":"Home Assistant","supported_features":1},"last_changed":"2025-07-15T18:41:48.810571+00:00","last_reported":"2025-07-15T18:41:48.810571+00:00","last_updated":"2025-07-15T18:41:48.810571+00:00","context":{"id":"01K07P978AM9Q05ZAWXCCM7K2A","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2025-08-03T09:26:51.304415+00:00"
+    },
+    {
+      "state": {"entity_id":"switch.everything_off","state":"off","attributes":{"assumed_state":true,"icon":"mdi:power","friendly_name":"Everything Off"},"last_changed":"2025-07-15T18:41:49.216408+00:00","last_reported":"2025-07-15T18:41:49.216408+00:00","last_updated":"2025-07-15T18:41:49.216408+00:00","context":{"id":"01K07P97N04JH7XGCZ99TMT8T8","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2025-08-03T09:26:51.304415+00:00"
+    },
+    {
+      "state": {"entity_id":"tts.google_translate_en_com","state":"unknown","attributes":{"friendly_name":"Google Translate en com"},"last_changed":"2025-07-15T18:41:49.393735+00:00","last_reported":"2025-07-15T18:41:49.393735+00:00","last_updated":"2025-07-15T18:41:49.393735+00:00","context":{"id":"01K07P97THQYN8742KKJ8E6SGG","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2025-08-03T09:26:51.304415+00:00"
+    },
+    {
+      "state": {"entity_id":"device_tracker.iphone_von_lane","state":"home","attributes":{"source_type":"gps","battery_level":50,"latitude":52.5520272952287,"longitude":13.358956185748442,"gps_accuracy":13,"altitude":43.61375121562378,"vertical_accuracy":30,"friendly_name":"iPhone von Lane"},"last_changed":"2025-08-02T13:50:33.916543+00:00","last_reported":"2025-08-02T13:50:33.916543+00:00","last_updated":"2025-08-02T13:50:33.916543+00:00","context":{"id":"01K1NGRVXWKZK5NQ4EAVAM04ME","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2025-08-03T09:26:51.304415+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.iphone_von_lane_activity","state":"unavailable","attributes":{"icon":"mdi:dots-square","friendly_name":"iPhone von Lane Activity"},"last_changed":"2025-07-19T17:12:50.636623+00:00","last_reported":"2025-07-19T17:12:51.196175+00:00","last_updated":"2025-07-19T17:12:50.636623+00:00","context":{"id":"01K0HTS66CQVH2VGSQR0XAF95Q","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "unavailable",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2025-08-03T09:26:51.304415+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.iphone_von_lane_distance","state":"unavailable","attributes":{"unit_of_measurement":"m","icon":"mdi:dots-square","friendly_name":"iPhone von Lane Distance"},"last_changed":"2025-07-19T17:12:50.637167+00:00","last_reported":"2025-07-19T17:12:51.196402+00:00","last_updated":"2025-07-19T17:12:50.637167+00:00","context":{"id":"01K0HTS66DZQ1K353KC9P7HP57","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "unavailable",
+        "native_unit_of_measurement": "m"
+      },
+      "last_seen": "2025-08-03T09:26:51.304415+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.iphone_von_lane_floors_ascended","state":"unavailable","attributes":{"unit_of_measurement":"floors","icon":"mdi:dots-square","friendly_name":"iPhone von Lane Floors Ascended"},"last_changed":"2025-07-19T17:12:50.637534+00:00","last_reported":"2025-07-19T17:12:51.196578+00:00","last_updated":"2025-07-19T17:12:50.637534+00:00","context":{"id":"01K0HTS66D86ZAETQK92J6CEP1","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "unavailable",
+        "native_unit_of_measurement": "floors"
+      },
+      "last_seen": "2025-08-03T09:26:51.304415+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.iphone_von_lane_floors_descended","state":"unavailable","attributes":{"unit_of_measurement":"floors","icon":"mdi:dots-square","friendly_name":"iPhone von Lane Floors Descended"},"last_changed":"2025-07-19T17:12:50.637936+00:00","last_reported":"2025-07-19T17:12:51.196772+00:00","last_updated":"2025-07-19T17:12:50.637936+00:00","context":{"id":"01K0HTS66D5QWA8PNXVGEFF160","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "unavailable",
+        "native_unit_of_measurement": "floors"
+      },
+      "last_seen": "2025-08-03T09:26:51.304415+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.iphone_von_lane_steps","state":"unavailable","attributes":{"unit_of_measurement":"steps","icon":"mdi:dots-square","friendly_name":"iPhone von Lane Steps"},"last_changed":"2025-07-19T17:12:50.639373+00:00","last_reported":"2025-07-19T17:12:51.196931+00:00","last_updated":"2025-07-19T17:12:50.639373+00:00","context":{"id":"01K0HTS66FP21R9R8SZ128AW8Y","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "unavailable",
+        "native_unit_of_measurement": "steps"
+      },
+      "last_seen": "2025-08-03T09:26:51.304415+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.iphone_von_lane_average_active_pace","state":"unavailable","attributes":{"unit_of_measurement":"m/s","icon":"mdi:dots-square","friendly_name":"iPhone von Lane Average Active Pace"},"last_changed":"2025-07-19T17:12:50.639764+00:00","last_reported":"2025-07-19T17:12:51.197084+00:00","last_updated":"2025-07-19T17:12:50.639764+00:00","context":{"id":"01K0HTS66F5PSXSN8YT0FW4E2S","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "unavailable",
+        "native_unit_of_measurement": "m/s"
+      },
+      "last_seen": "2025-08-03T09:26:51.304415+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.iphone_von_lane_battery_level","state":"50","attributes":{"unit_of_measurement":"%","device_class":"battery","icon":"mdi:battery-50","friendly_name":"iPhone von Lane Battery Level"},"last_changed":"2025-08-02T13:50:33.991307+00:00","last_reported":"2025-08-02T13:50:33.991307+00:00","last_updated":"2025-08-02T13:50:33.991307+00:00","context":{"id":"01K1NGRW07WQFQYPMVG9NRV4G1","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": 50,
+        "native_unit_of_measurement": "%"
+      },
+      "last_seen": "2025-08-03T09:26:51.304415+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.iphone_von_lane_battery_state","state":"Not Charging","attributes":{"Low Power Mode":false,"icon":"mdi:battery-50","friendly_name":"iPhone von Lane Battery State"},"last_changed":"2025-08-02T13:25:43.121990+00:00","last_reported":"2025-08-02T13:25:43.121990+00:00","last_updated":"2025-08-02T13:25:43.121990+00:00","context":{"id":"01K1NFBC2H1D5RKZ76QEDAQ9KG","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "Not Charging",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2025-08-03T09:26:51.304415+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.iphone_von_lane_storage","state":"unavailable","attributes":{"unit_of_measurement":"% available","icon":"mdi:dots-square","friendly_name":"iPhone von Lane Storage"},"last_changed":"2025-07-19T17:12:50.640842+00:00","last_reported":"2025-07-19T17:12:51.197605+00:00","last_updated":"2025-07-19T17:12:50.640842+00:00","context":{"id":"01K0HTS66G07F47QDNCAQX89Q7","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "unavailable",
+        "native_unit_of_measurement": "% available"
+      },
+      "last_seen": "2025-08-03T09:26:51.304415+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.iphone_von_lane_ssid","state":"unavailable","attributes":{"icon":"mdi:dots-square","friendly_name":"iPhone von Lane SSID"},"last_changed":"2025-07-19T17:12:50.641178+00:00","last_reported":"2025-07-19T17:12:51.197779+00:00","last_updated":"2025-07-19T17:12:50.641178+00:00","context":{"id":"01K0HTS66H5TNMX0PP1T9XXTWY","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "unavailable",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2025-08-03T09:26:51.304415+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.iphone_von_lane_bssid","state":"unavailable","attributes":{"icon":"mdi:dots-square","friendly_name":"iPhone von Lane BSSID"},"last_changed":"2025-07-19T17:12:50.641488+00:00","last_reported":"2025-07-19T17:12:51.197930+00:00","last_updated":"2025-07-19T17:12:50.641488+00:00","context":{"id":"01K0HTS66HDJ55MZNDYYMCNPJT","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "unavailable",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2025-08-03T09:26:51.304415+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.iphone_von_lane_connection_type","state":"unavailable","attributes":{"icon":"mdi:dots-square","friendly_name":"iPhone von Lane Connection Type"},"last_changed":"2025-07-19T17:12:50.641822+00:00","last_reported":"2025-07-19T17:12:51.198080+00:00","last_updated":"2025-07-19T17:12:50.641822+00:00","context":{"id":"01K0HTS66HBBE3K7NVXR0PQH17","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "unavailable",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2025-08-03T09:26:51.304415+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.iphone_von_lane_last_update_trigger","state":"unavailable","attributes":{"icon":"mdi:dots-square","friendly_name":"iPhone von Lane Last Update Trigger"},"last_changed":"2025-07-19T17:12:50.644495+00:00","last_reported":"2025-07-19T17:12:51.198697+00:00","last_updated":"2025-07-19T17:12:50.644495+00:00","context":{"id":"01K0HTS66MRMS5S6ENT928HQED","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "unavailable",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2025-08-03T09:26:51.304415+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.iphone_von_lane_app_version","state":"2025.7.1","attributes":{"icon":"mdi:cellphone","friendly_name":"iPhone von Lane App Version"},"last_changed":"2025-07-19T17:12:50.644865+00:00","last_reported":"2025-07-19T17:12:51.199623+00:00","last_updated":"2025-07-19T17:12:50.644865+00:00","context":{"id":"01K0HTS66M4T4C8KWD74KRMNY9","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "2025.7.1",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2025-08-03T09:26:51.304415+00:00"
+    },
+    {
+      "state": {"entity_id":"binary_sensor.iphone_von_lane_focus","state":"unavailable","attributes":{"icon":"mdi:dots-square","friendly_name":"iPhone von Lane Focus"},"last_changed":"2025-07-19T17:12:50.644153+00:00","last_reported":"2025-07-19T17:12:51.198526+00:00","last_updated":"2025-07-19T17:12:50.644153+00:00","context":{"id":"01K0HTS66MF3YVBCMWE6H9XQB8","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2025-08-03T09:26:51.304415+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.iphone_von_lane_location_permission","state":"Authorized Always","attributes":{"icon":"mdi:map","friendly_name":"iPhone von Lane Location permission"},"last_changed":"2025-07-19T17:12:50.221670+00:00","last_reported":"2025-07-19T17:12:51.199836+00:00","last_updated":"2025-07-19T17:12:50.221670+00:00","context":{"id":"01K0HTS5SDY8KWAXJVPG4Q7KVY","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "Authorized Always",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2025-08-03T09:26:51.304415+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.iphone_von_lane_audio_output","state":"unavailable","attributes":{"icon":"mdi:dots-square","friendly_name":"iPhone von Lane Audio Output"},"last_changed":"2025-07-19T17:12:50.645395+00:00","last_reported":"2025-07-19T17:12:51.199997+00:00","last_updated":"2025-07-19T17:12:50.645395+00:00","context":{"id":"01K0HTS66NHZ59VV35EJZTKZ4Y","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "unavailable",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2025-08-03T09:26:51.304415+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.iphone_von_lane_geocoded_location","state":"unavailable","attributes":{"icon":"mdi:dots-square","friendly_name":"iPhone von Lane Geocoded Location"},"last_changed":"2025-07-19T17:39:40.220920+00:00","last_reported":"2025-07-19T17:39:40.220920+00:00","last_updated":"2025-07-19T17:39:40.220920+00:00","context":{"id":"01K0HWAA1W8NEXDCADGE1E5JX3","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "unavailable",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2025-08-03T09:26:51.304415+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.iphone_von_lane_sim_2","state":"unavailable","attributes":{"icon":"mdi:dots-square","friendly_name":"iPhone von Lane SIM 2"},"last_changed":"2025-07-19T17:12:50.643291+00:00","last_reported":"2025-07-19T17:12:51.198224+00:00","last_updated":"2025-07-19T17:12:50.643291+00:00","context":{"id":"01K0HTS66KAKSX58KPNARGQ2CX","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "unavailable",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2025-08-03T09:26:51.304415+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.iphone_von_lane_sim_1","state":"unavailable","attributes":{"icon":"mdi:dots-square","friendly_name":"iPhone von Lane SIM 1"},"last_changed":"2025-07-19T17:12:50.643770+00:00","last_reported":"2025-07-19T17:12:51.198370+00:00","last_updated":"2025-07-19T17:12:50.643770+00:00","context":{"id":"01K0HTS66KN7TJG13MTVY1X8PR","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": "unavailable",
+        "native_unit_of_measurement": null
+      },
+      "last_seen": "2025-08-03T09:26:51.304415+00:00"
+    }
+  ]
+}
