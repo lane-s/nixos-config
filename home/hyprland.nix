@@ -7,12 +7,12 @@
     settings = {
       # Monitor configuration - dual monitor setup with single monitor fallback
       monitor = [
-        # Default fallback for any unspecified monitor
-        ",preferred,auto,1"
+        # Dual monitor setup - let Hyprland choose the best available resolution
+        "DP-3,preferred,0x0,1"             # Left monitor at position 0,0
+        "DP-1,preferred,auto,1"            # Right monitor auto-positioned next to left
         
-        # Dual monitor setup - Try swapped positions based on mouse behavior
-        "DP-3,preferred,0x0,1"           # Left monitor (was right)
-        "DP-1,preferred,1920x0,1"        # Right monitor (was left)
+        # Default fallback for any other monitor
+        ",preferred,auto,1"
       ];
       
       # General settings

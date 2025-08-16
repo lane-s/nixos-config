@@ -46,6 +46,11 @@
     };
   };
   
+  # Remove btop config before rebuild to prevent conflicts
+  home.activation.removeBtopConfig = config.lib.dag.entryBefore ["checkLinkTargets"] ''
+    rm -rf ~/.config/btop
+  '';
+
   # Create custom Copland theme for btop
   home.file.".config/btop/themes/copland.theme" = {
     force = true;  # Overwrite existing files
