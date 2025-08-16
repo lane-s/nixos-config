@@ -113,11 +113,11 @@
         "$mod SHIFT, period, movewindow, mon:+1"  # Move to next monitor
         
         # Synchronized workspace switching (both monitors together)
-        "$mod, 1, exec, hyprctl dispatch workspace 1 && hyprctl dispatch workspace 6"
-        "$mod, 2, exec, hyprctl dispatch workspace 2 && hyprctl dispatch workspace 7"
-        "$mod, 3, exec, hyprctl dispatch workspace 3 && hyprctl dispatch workspace 8"
-        "$mod, 4, exec, hyprctl dispatch workspace 4 && hyprctl dispatch workspace 9"
-        "$mod, 5, exec, hyprctl dispatch workspace 5 && hyprctl dispatch workspace 10"
+        "$mod, 1, exec, sh -c 'hyprctl dispatch workspace 1; hyprctl dispatch workspace 6'"
+        "$mod, 2, exec, sh -c 'hyprctl dispatch workspace 2; hyprctl dispatch workspace 7'"
+        "$mod, 3, exec, sh -c 'hyprctl dispatch workspace 3; hyprctl dispatch workspace 8'"
+        "$mod, 4, exec, sh -c 'hyprctl dispatch workspace 4; hyprctl dispatch workspace 9'"
+        "$mod, 5, exec, sh -c 'hyprctl dispatch workspace 5; hyprctl dispatch workspace 10'"
         
         # Move to workspace
         "$mod SHIFT, 1, movetoworkspace, 1"

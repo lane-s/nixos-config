@@ -16,6 +16,20 @@
   # Open ports for HomeKit
   networking.firewall.allowedTCPPorts = [ 21063 51827 ];  # HomeKit Bridge
   networking.firewall.allowedUDPPorts = [ 5353 ];  # mDNS/Bonjour
+  
+  # Enable multicast for mDNS
+  networking.firewall.extraCommands = ''
+    iptables -A INPUT -d 224.0.0.251 -p udp -m udp --dport 5353 -j ACCEPT
+    iptables -A INPUT -d 239.255.255.250 -p udp -m udp --dport 1900 -j ACCEPT
+  '';
+  
+  # Kernel settings for multicast
+  boot.kernel.sysctl = {
+    "net.ipv4.conf.all.rp_filter" = 0;
+    "net.ipv4.conf.default.rp_filter" = 0;
+    "net.ipv4.igmp_max_memberships" = 20;
+    "net.ipv4.igmp_max_msf" = 10;
+  };
 
   # Home Assistant service
   services.home-assistant = {
