@@ -48,6 +48,7 @@
   
   # Create custom Copland theme for btop
   home.file.".config/btop/themes/copland.theme" = {
+    force = true;  # Overwrite existing files
     text = ''
       # Copland OS Enterprise Theme for btop
       # By lspangler

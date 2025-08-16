@@ -104,17 +104,20 @@
         "$mod SHIFT, k, movewindow, u"
         "$mod SHIFT, j, movewindow, d"
         
-        # Synchronized workspace switching (both monitors together) 
+        # Monitor focus switching
+        "$mod, comma, focusmonitor, -1"   # Focus previous monitor
+        "$mod, period, focusmonitor, +1"  # Focus next monitor
+        
+        # Move window to monitor
+        "$mod SHIFT, comma, movewindow, mon:-1"   # Move to previous monitor
+        "$mod SHIFT, period, movewindow, mon:+1"  # Move to next monitor
+        
+        # Synchronized workspace switching (both monitors together)
         "$mod, 1, exec, hyprctl dispatch workspace 1 && hyprctl dispatch workspace 6"
         "$mod, 2, exec, hyprctl dispatch workspace 2 && hyprctl dispatch workspace 7"
         "$mod, 3, exec, hyprctl dispatch workspace 3 && hyprctl dispatch workspace 8"
-        "$mod, 4, workspace, 4"
-        "$mod, 5, workspace, 5"
-        "$mod, 6, workspace, 6"
-        "$mod, 7, workspace, 7"
-        "$mod, 8, workspace, 8"
-        "$mod, 9, workspace, 9"
-        "$mod, 0, workspace, 10"
+        "$mod, 4, exec, hyprctl dispatch workspace 4 && hyprctl dispatch workspace 9"
+        "$mod, 5, exec, hyprctl dispatch workspace 5 && hyprctl dispatch workspace 10"
         
         # Move to workspace
         "$mod SHIFT, 1, movetoworkspace, 1"
@@ -153,15 +156,19 @@
       
       # Workspace assignment to monitors (synchronized pairs)
       workspace = [
-        # Left monitor (DP-3): workspaces 1-3
-        "1, monitor:DP-3, default:true"    # Development: mprocs + claude
-        "2, monitor:DP-3"                  # Extended dev: empty for now
-        "3, monitor:DP-3"                  # Monitoring: btop
+        # Left monitor (DP-3): workspaces 1-5
+        "1, monitor:DP-3, default:true"
+        "2, monitor:DP-3"
+        "3, monitor:DP-3"
+        "4, monitor:DP-3"
+        "5, monitor:DP-3"
         
-        # Right monitor (DP-1): workspaces 6-8 (sync with left)
-        "6, monitor:DP-1, default:true"    # Development: emacs
-        "7, monitor:DP-1"                  # Extended dev: second emacs  
-        "8, monitor:DP-1"                  # Monitoring: config terminal
+        # Right monitor (DP-1): workspaces 6-10 (paired with 1-5)
+        "6, monitor:DP-1, default:true"
+        "7, monitor:DP-1"
+        "8, monitor:DP-1"
+        "9, monitor:DP-1"
+        "10, monitor:DP-1"
       ];
       
       # Window rules for specific applications
@@ -183,9 +190,6 @@
       
       # Startup applications
       exec-once = [
-        # Start Emacs daemon
-        "emacs --daemon"
-        
         # Notification daemon
         "dunst"
         
@@ -195,37 +199,8 @@
         # Wallpaper (using swaybg) - Copeland image on both monitors
         "swaybg -i /etc/nixos/copeland.jpg -m fill"
         
-        # Wallpaper (using hyprpaper - uncomment to use)
-        # "hyprpaper"
-        
         # Polkit agent
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
-        
-        # Default layout setup using exec workspace assignment (reliable approach)
-        "sleep 3 && ${pkgs.writeShellScript "setup-default-layout" ''
-          # WORKSPACE 1+6: Development (Super+1)
-          # Left monitor: mprocs (left) + claude (right)
-          hyprctl dispatch exec '[workspace 1 silent] ghostty --title="Mprocs Terminal" -e bash -c "cd ~/src/catch.ideas && mprocs -c mprocs.yaml"'
-          hyprctl dispatch exec '[workspace 1 silent] ghostty --title="Claude Terminal" -e bash -c "cd ~/src/catch.ideas && claude --dangerously-skip-permissions"'
-          # Right monitor: emacs
-          hyprctl dispatch exec '[workspace 6 silent] emacs ~/src/catch.ideas'
-          
-          # WORKSPACE 2+7: Extended Development (Super+2)  
-          # Left monitor: chromium browser
-          hyprctl dispatch exec '[workspace 2 silent] chromium'
-          # Right monitor: second emacs window with org-roam dailies (using Doom's command)
-          hyprctl dispatch exec '[workspace 7 silent] bash -c "sleep 5 && emacsclient -c -a emacs --eval \"(run-at-time 0.5 nil (lambda () (org-roam-dailies-goto-today)))\""'
-          
-          # WORKSPACE 3+8: Monitoring (Super+3)
-          # Left monitor: btop
-          hyprctl dispatch exec '[workspace 3 silent] ghostty --title="System Monitor" -e btop'
-          # Right monitor: config management terminal in /etc/nixos
-          hyprctl dispatch exec '[workspace 8 silent] ghostty --title="Config Terminal" -e bash -c "cd /etc/nixos && bash"'
-          
-          # Switch to main development workspace (both monitors)
-          hyprctl dispatch workspace 1
-          hyprctl dispatch workspace 6
-        ''}"
       ];
     };
   };

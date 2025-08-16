@@ -16,7 +16,7 @@
       nix-update = "nix flake update";
       
       # Sync command for this setup
-      sync-env = "~/.init-env/nixos-config/sync-env.sh";
+      sync-env = "cd ~/.init-env && git pull && ./bootstrap.sh";
     };
     
     initExtra = ''

@@ -1,127 +1,159 @@
-# NixOS + Hyprland Development Environment
+# 🚀 lspangler's Development Environment
 
-This is a NixOS configuration that ports the Guix-based setup to NixOS with Hyprland as the window manager.
+Dead-simple, universal configuration that works anywhere - NixOS, macOS, or any Linux distribution.
 
-## Features
+## Quick Start
 
-- **NixOS Flakes** for reproducible system configuration
-- **Hyprland** Wayland compositor with Emacs-friendly keybindings
-- **Doom Emacs** with Wayland-native support
-- **Home Manager** for user-level package management
-- **Dual monitor support** with automatic single monitor fallback
-
-## Prerequisites
-
-1. A fresh NixOS installation (minimal ISO is fine)
-2. Git installed: `nix-env -iA nixos.git`
-3. Flakes enabled in your NixOS configuration
-
-## Installation
-
-For Ubuntu/Mint → NixOS migration, see `UBUNTU-TO-NIXOS.md`
-
-1. Clone this repository:
+**One-liner deployment:**
 ```bash
-git clone https://github.com/lane-s/nixos-config.git ~/.init-env/nixos-config
-cd ~/.init-env/nixos-config
+curl -L https://raw.githubusercontent.com/lspangler/init-env/main/bootstrap.sh | bash
 ```
 
-2. Update the configuration files:
-   - Replace `youruser` with your username in all files
-   - Update hardware configuration: `sudo nixos-generate-config --show-hardware-config > hosts/lsp-desktop/hardware-configuration.nix`
-   - Adjust monitor configuration in `home/hyprland.nix`
-
-3. Build and switch to the new configuration:
+**For NixOS - clone directly to /etc/nixos:**
 ```bash
+sudo git clone https://github.com/lspangler/init-env.git /etc/nixos
+cd /etc/nixos
 sudo nixos-rebuild switch --flake .#lsp-desktop
 ```
 
-4. Reboot and log in to Hyprland
-
-5. First-time Doom Emacs setup will run automatically
-
-## Key Bindings
-
-### Window Management
-- `Super + Return` - Open terminal (kitty)
-- `Super + e` - Open Emacs client
-- `Super + Shift + e` - Open new Emacs instance
-- `Super + x` - Application launcher (like M-x)
-- `Super + q` - Close window
-- `Super + Shift + q` - Exit Hyprland
-- `Super + f` - Fullscreen
-- `Super + Space` - Toggle floating
-
-### Navigation
-- `Super + h/j/k/l` - Focus left/down/up/right
-- `Super + Shift + h/j/k/l` - Move window left/down/up/right
-- `Super + 1-9,0` - Switch to workspace 1-10
-- `Super + Shift + 1-9,0` - Move window to workspace
-
-### Screenshots
-- `Print` - Screenshot selection
-- `Shift + Print` - Screenshot full screen
-
-## Updating
-
-To update the system:
+**For macOS/Linux - use bootstrap:**
 ```bash
-cd ~/.init-env/nixos-config
-nix flake update
-sudo nixos-rebuild switch --flake .#dev-machine
+git clone https://github.com/lspangler/init-env.git ~/.init-env
+cd ~/.init-env
+./bootstrap.sh
+```
+
+That's it! The script detects your OS and sets up everything automatically.
+
+## What You Get
+
+### **NixOS Systems**
+- Complete system configuration with Hyprland window manager
+- Dual-monitor workspace management with synchronized switching
+- Automatic application layout (development, browser, monitoring workspaces)
+- Clone this repo directly to `/etc/nixos` (no symlinks!)
+
+### **macOS & Linux Systems**  
+- Nix package manager with flake support
+- home-manager for dotfile management
+- Cross-platform Doom Emacs configuration
+- Development tools and shell environment
+
+### **Universal Features**
+- 🎯 **Doom Emacs** - Fully configured with org-roam, LSP, development packages
+- 🔧 **Development Stack** - Git, compilers, language servers, debugging tools  
+- 🖼️ **Beautiful Setup** - Custom fonts, themes, wallpapers
+- ⚡ **Fast Workflow** - Optimized keybindings and window management
+- 🔄 **Stay in Sync** - Git-based configuration management
+
+## How It Works
+
+The bootstrap script:
+1. **Detects your operating system** (NixOS, macOS, Ubuntu, etc.)
+2. **Installs Nix** if not present (with flake support)
+3. **Runs OS-specific setup** from the `install/` directory
+4. **Configures your environment** using this repository
+
+### NixOS
+- Clone this repo directly to `/etc/nixos`
+- Your system config IS this Git repo
+- `nixos-rebuild switch --flake .#lsp-desktop` applies changes
+
+### macOS/Linux
+- Installs Nix package manager
+- Uses home-manager for user environment
+- Consistent tooling across different base systems
+
+## Repository Structure
+
+This repository IS the NixOS configuration. Clone it directly to `/etc/nixos`:
+
+```
+/etc/nixos/  (this repo)
+├── flake.nix              # Main flake definition
+├── hosts/                 # Machine-specific configs
+│   └── lsp-desktop/       # Desktop configuration
+├── home/                  # Home-manager modules  
+├── modules/               # Reusable system modules
+├── homeassistant_cfg/     # Home Assistant config
+├── .doom.d/               # Doom Emacs configuration
+├── bootstrap.sh           # Universal setup script
+└── install/               # OS-specific installers
+```
+
+## Daily Usage
+
+### Making Changes
+
+**NixOS:**
+```bash
+# Edit any file directly in /etc/nixos/
+vim /etc/nixos/home/hyprland.nix
+
+# Apply system changes
+sudo nixos-rebuild switch --flake /etc/nixos
+
+# Apply user changes  
+home-manager switch --flake ~/.init-env
+```
+
+**macOS/Linux:**
+```bash
+# Edit configurations
+vim ~/.init-env/nixos/home/emacs.nix
+
+# Apply changes
+home-manager switch --flake ~/.init-env
+```
+
+### Staying Updated
+```bash
+cd ~/.init-env
+git pull origin main
+./bootstrap.sh  # Re-run to apply updates
 ```
 
 ## Customization
 
-### Monitor Setup
-Edit `home/hyprland.nix` and uncomment/modify the monitor lines:
-```nix
-monitor = [
-  ",preferred,auto,1"  # Fallback
-  "DP-1,2560x1440@144,0x0,1"       # Main monitor
-  "HDMI-A-1,1920x1080@60,2560x0,1" # Secondary monitor
-];
-```
+1. **Fork this repository** to your GitHub account
+2. **Update the `REPO_URL`** in `bootstrap.sh` to point to your fork
+3. **Modify configurations** in the `nixos/` directory
+4. **Deploy anywhere** with your personalized setup
 
-### Packages
-- System packages: `modules/base.nix`
-- User packages: `home/packages.nix`
+## Advanced Features
 
-### Doom Emacs
-Your Doom configuration is in `.doom.d/` and will be automatically linked.
-
-## Differences from Guix Setup
-
-1. **Package Manager**: Nix instead of Guix
-2. **Window Manager**: Hyprland (Wayland) instead of EXWM (X11)
-3. **Display Server**: Wayland instead of X11
-4. **Init System**: systemd instead of GNU Shepherd
-5. **Configuration Language**: Nix instead of Scheme
-
-## Home Assistant Integration
-
-To enable Home Assistant:
-1. Uncomment the Home Assistant module in `hosts/dev-machine/configuration.nix`
-2. Place your backup at `/backup/homeassistant-backup.tar.gz` before rebuilding
-3. The service will automatically restore your config on first boot
-4. Access Home Assistant at `http://localhost:8123`
-
-## Migration from Other Distros
-
-See `MIGRATION.md` for detailed instructions on migrating from Linux Mint or other distributions.
+- **Hardware Detection** - Automatically configures graphics, monitors, input devices
+- **Secrets Management** - Template-based setup for SSH keys, API tokens
+- **Rollback Safety** - Nix generations let you undo any change
+- **Multi-Machine Sync** - Same config works on laptop, desktop, servers
+- **Development Ready** - Pre-configured for Rust, Python, C++, TypeScript, etc.
 
 ## Troubleshooting
 
-### Wayland Issues
-If some applications don't work properly:
-- Electron apps: Should work with `NIXOS_OZONE_WL=1`
-- Firefox: Should work with `MOZ_ENABLE_WAYLAND=1`
-- For X11-only apps, XWayland is enabled by default
+**Test before applying:**
+```bash
+# NixOS
+sudo nixos-rebuild dry-build --flake /etc/nixos
 
-### Emacs Issues
-- If Emacs daemon doesn't start: `systemctl --user restart emacs`
-- For native compilation issues: Check `~/.cache/emacs/eln-cache`
+# home-manager  
+home-manager build --flake ~/.init-env/nixos
+```
 
-### Performance
-- Enable hardware acceleration in `hardware-configuration.nix`
-- Check GPU drivers are properly configured
+**Rollback if needed:**
+```bash
+# NixOS
+sudo nixos-rebuild --rollback
+
+# home-manager
+home-manager generations  # list generations
+home-manager switch --flake ~/.init-env --switch-generation 42
+```
+
+**Common issues:**
+- **Flakes not enabled**: Add `experimental-features = nix-command flakes` to `~/.config/nix/nix.conf`
+- **Permission errors**: Ensure `/etc/nixos` symlink is owned by root
+- **Build failures**: Check `nixos-rebuild dry-build` first to catch errors
+
+## Migration from Legacy
+
+If you're upgrading from the old Guix-based setup, your old configs are safely archived in `legacy/`. The new system is completely independent - no manual migration needed, just run the new bootstrap script.

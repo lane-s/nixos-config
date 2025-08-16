@@ -28,10 +28,10 @@
 ;; refresh your font settings. If Emacs still can't find your font, it likely
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
 
-;; Set the default font size (comfortable for coding)
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 20)
-      doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font" :size 21)
-      doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 30))
+;; Set the default font size (nice and large for comfortable coding)
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 22)
+      doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font" :size 23)
+      doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 32))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -146,8 +146,8 @@
                :if-new (file+head+olp "%<%Y-%m-%d>.org" ,head ()))))))
 
   (setq my-org-roam-context-alist
-        `(("local" . ,(concat org-directory "/roam"))
-          ("l30" . "~/src/catch.ideas/roam")
+        `(("l30" . "~/src/catch.ideas/roam")
+          ("local" . ,(concat org-directory "/roam"))
           ("shared" . ,(concat "~/.init-env" "/knowledge-base"))))
 
   (defun lsp/org-roam-switch-context (c)
@@ -226,6 +226,12 @@
 (when (string= user-name "lspangler")
   (setq inferior-lisp-program "/usr/local/bin/sbcl"))
 
+;; macOS-specific font adjustments (smaller sizes for high DPI displays)
+(when (eq system-type 'darwin)
+  (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 13)
+        doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font" :size 14)
+        doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 20)))
+
 (setq active-ssh-id-file "~/.ssh_id")
 
 (when (not (file-exists-p active-ssh-id-file))
@@ -264,6 +270,12 @@ information retrieved from files created by the keychain script."
     (doom-file-write active-ssh-id-file new-id)))
 
 (map! :leader "t i" #'lsp/switch-ssh-id)
+(add-to-list 'exec-path "~/src/.local/bin")
+
+;; TODO Hack. This should be built-in, but maybe emacs is up to date?
+;; Or it was removed and packages aren't up to date
+(defun treesit-available-p ()
+  't)
 
 (when (file-exists-p "~/src/tools/Emacs")
   (setq ableton-live-repo-dir "~/src/live")
@@ -495,7 +507,16 @@ Return nil if is not in a template."
 (setq clang-format-style "file:/Users/lspangler/Documents/live/.clang-format")
 (setq clang-format-style nil)
 
+;; Web
+;;
+
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-ts-mode))
+
+;; Rust
+;;
+(setq rustic-cargo-bin "~/.cargo/bin/cargo")
+
+;; Ai
 
 (use-package! gptel
   :custom
@@ -519,6 +540,8 @@ Return nil if is not in a template."
   (elysium-window-size 0.33) ; The elysium buffer will be 1/3 your screen
   (elysium-window-style 'vertical)) ; Can be customized to horizontal
 
+
+;; Hardware detection
 (add-load-path! (file-name-directory load-file-name))
 
 (require 'keyboard-monitor)
@@ -530,10 +553,13 @@ Return nil if is not in a template."
 
 (use-package! cider
   :config
-  ;; For lispy-clojure
-  (cider-add-to-alist 'cider-jack-in-dependencies
-                      "org.clojure/tools.namespace"
-                      "1.5.0")
+  ;; For cider + lispy-clojure
+  (cider-add-to-alist 'cider-jack-in-dependencies "org.clojure/tools.namespace" "1.5.0")
+  (cider-add-to-alist 'cider-jack-in-dependencies "org.tcrawley/dynapath" "0.2.5")
+  (cider-add-to-alist 'cider-jack-in-dependencies "com.cemerick/pomegranate" "0.4.0")
+  (cider-add-to-alist 'cider-jack-in-dependencies "cider/cider-nrepl" "0.52.0")
+
+  (add-hook 'clojurescript-mode-hook 'lsp)
   (add-hook 'cider-connected-hook
             (lambda ()
               (message "Loading lispy middleware...")
@@ -547,6 +573,7 @@ Return nil if is not in a template."
  (require 'clj-reload.core)
  (clj-reload.core/reload)
 (l30.tools.repl/start!)"))
+;; Smerge hydra
 
 (use-package! hydra
   :config
@@ -568,3 +595,26 @@ _p_: prev conflit         _l_: keep lower
 
 
   (map! :leader "g m" #'smerge-hydra/body))
+
+(defun lsp/revert-all-file-buffers ()
+  "Refresh all open file buffers without confirmation.
+Buffers in modified (not yet saved) state in emacs will not be reverted. They
+will be reverted though if they were modified outside emacs.
+Buffers visiting files which do not exist any more or are no longer readable
+will be killed."
+  (interactive)
+  (dolist (buf (buffer-list))
+    (let ((filename (buffer-file-name buf)))
+      ;; Revert only buffers containing files, which are not modified;
+      ;; do not try to revert non-file buffers like *Messages*.
+      (when (and filename
+                 (not (buffer-modified-p buf)))
+        (if (file-readable-p filename)
+            ;; If the file exists and is readable, revert the buffer.
+            (with-current-buffer buf
+              (revert-buffer :ignore-auto :noconfirm :preserve-modes))
+          ;; Otherwise, kill the buffer.
+          (let (kill-buffer-query-functions) ; No query done when killing buffer
+            (kill-buffer buf)
+            (message "Killed non-existing/unreadable file buffer: %s" filename))))))
+  (message "Finished reverting buffers containing unmodified files."))

@@ -16,7 +16,7 @@ shell_command:
 
 switch:
   - platform: group
-    name: Studio
+    name: "Studio"
     unique_id: studio_switches
     entities:
       - switch.clarett
